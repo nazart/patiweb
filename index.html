@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+window.__resources = {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "js/vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "js/vendor/react-dom.production.min.js",
+  "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "js/vendor/babel.min.js"
+};
+</script>
+<script src="js/dc-runtime.js"></script>
+
+
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/base.css">
+</helmet>
+<div style="width:100%;background:#FAF8F4">
+
+  <!-- HEADER -->
+  <header style="position:{{ headerPosition }};top:0;z-index:50;background:rgba(250,248,244,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(33,29,24,0.08)">
+    <div style="max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <div style="display:flex;align-items:center;gap:9px">
+        <img src="images/pati-logo.png" alt="PATI" style="width:34px;height:34px;object-fit:contain">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em">PATI</span>
+      </div>
+      <sc-if value="{{ !isMobile }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;gap:30px;font-size:14.5px;font-weight:500;color:#4A4438">
+          <sc-for list="{{ navLinks }}" as="nl" hint-placeholder-count="5">
+            <a href="{{ nl.href }}" sc-camel-on-click="{{ nl.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;color:{{ nl.textColor }};transition:color 0.15s ease">
+              {{ nl.label }}
+              <span style="width:5px;height:5px;border-radius:50%;background:#5B4DE6;opacity:{{ nl.dotOpacity }};transform:scale({{ nl.dotScale }});transition:opacity 0.2s ease,transform 0.2s ease"></span>
+            </a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#E85A22;color:#fff;font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:100px;white-space:nowrap">Escribir por WhatsApp</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section style="position:relative;overflow:hidden">
+    <div style="position:absolute;top:-180px;right:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(232,90,34,0.14),transparent 70%);z-index:0"></div>
+    <div style="position:absolute;top:120px;left:-180px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(91,77,230,0.1),transparent 70%);z-index:0"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,88px) 20px clamp(48px,8vw,96px);display:flex;flex-wrap:wrap-reverse;gap:clamp(32px,6vw,64px);align-items:center;position:relative;z-index:1">
+    <div style="flex:1 1 420px;min-width:300px">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(91,77,230,0.09);color:#5B4DE6;font-weight:600;font-size:13px;padding:7px 14px;border-radius:100px;margin-bottom:22px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#5B4DE6"></span>
+        Empezando en Gamarra, Lima
+      </div>
+      <h1 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5.2vw,58px);line-height:1.06;letter-spacing:-0.02em;margin:0 0 18px">{{ heroHeadline }}</h1>
+      <p style="font-size:clamp(17px,2vw,20px);line-height:1.55;color:#4A4438;max-width:520px;margin:0 0 30px">{{ heroSub }}</p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+        <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#E85A22;color:#fff;font-weight:600;font-size:16px;padding:16px 26px;border-radius:12px;display:flex;align-items:center;gap:10px">Escribir por WhatsApp</a>
+        <a href="#descargar" style="background:#fff;color:#211D18;font-weight:600;font-size:16px;padding:16px 26px;border-radius:12px;border:1.5px solid rgba(33,29,24,0.14)">Descargar la app</a>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#compradores" style="flex:1 1 180px;background:rgba(232,90,34,0.08);border:1px solid rgba(232,90,34,0.2);border-radius:12px;padding:14px 16px">
+          <div style="font-weight:700;font-size:14.5px;color:#C6491A">Quiero comprar →</div>
+          <div style="font-size:13px;color:#4A4438;margin-top:2px">Pide y compara ofertas</div>
+        </a>
+        <a href="#vendedores" style="flex:1 1 180px;background:rgba(91,77,230,0.07);border:1px solid rgba(91,77,230,0.2);border-radius:12px;padding:14px 16px">
+          <div style="font-weight:700;font-size:14.5px;color:#5B4DE6">Quiero vender →</div>
+          <div style="font-size:13px;color:#4A4438;margin-top:2px">Recibe pedidos reales</div>
+        </a>
+      </div>
+    </div>
+
+    <div style="flex:1 1 300px;min-width:260px;display:flex;justify-content:center;box-sizing:border-box;padding:0 10px">
+      <div style="position:relative;max-width:100%">
+        <div style="position:absolute;top:-30px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(91,77,230,0.14),transparent 70%);z-index:0"></div>
+        <div style="position:relative;z-index:1">
+          <x-import component-from-global-scope="IOSDevice" from="js/ios-frame.jsx" width="{{ heroPhoneWidth }}" height="{{ heroPhoneHeight }}" hint-size="300,620">
+            <div style="width:100%;height:100%;position:relative">
+              <x-import component-from-global-scope="image-slot" from="js/image-slot.js" id="hero-screen" src="images/hero-screen.webp" shape="rect" placeholder="Captura: flujo de solicitud / ofertas por WhatsApp" hint-size="100%,100%" style="width:100%;height:100%"></x-import>
+            </div>
+          </x-import>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" style="background:#F7F3EC;padding:clamp(64px,9vw,130px) 20px">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="text-align:center;max-width:680px;margin:0 auto 64px">
+        <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(91,77,230,0.1);color:#5B4DE6;font-weight:700;font-size:15px;padding:9px 18px;border-radius:100px;margin-bottom:24px">
+          <span style="width:7px;height:7px;border-radius:50%;background:#5B4DE6"></span>
+          Cómo funciona
+        </div>
+        <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5.2vw,54px);line-height:1.1;letter-spacing:-0.015em;margin:0 0 18px">Tres pasos. Sin caminar de tienda en tienda.</h2>
+        <p style="font-size:clamp(17px,1.8vw,19.5px);line-height:1.6;color:#4A4438;margin:0">Así de simple es pedir en PATI, desde que escribes tu solicitud hasta que eliges la mejor oferta.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
+        <sc-for list="{{ steps }}" as="step" hint-placeholder-count="3">
+          <div style="background:#fff;border-radius:24px;padding:0 0 30px;box-shadow:0 16px 40px -22px rgba(33,29,24,0.3);position:relative;overflow:visible">
+            <div style="border-radius:24px 24px 0 0;overflow:hidden;background:#F4F1EB;padding:28px 0 0;display:flex;justify-content:center">
+              <div style="width:62%;aspect-ratio:9/16;border-radius:14px;overflow:hidden">
+                <x-import component-from-global-scope="image-slot" from="js/image-slot.js" id="{{ step.imgId }}" src="{{ step.imgSrc }}" shape="rect" placeholder="{{ step.imgPlaceholder }}" hint-size="100%,100%" style="width:100%;height:100%"></x-import>
+              </div>
+            </div>
+            <div style="width:56px;height:56px;border-radius:16px;background:{{ step.color }};color:#fff;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:23px;display:flex;align-items:center;justify-content:center;position:absolute;top:0;margin-top:-28px;left:26px;transform:rotate(-5deg);box-shadow:0 10px 20px -6px {{ step.shadow }};border:4px solid #fff">{{ step.n }}</div>
+            <div style="padding:34px 28px 0">
+              <h3 style="font-size:20px;font-weight:700;margin:0 0 10px">{{ step.title }}</h3>
+              <p style="font-size:15px;line-height:1.6;color:#4A4438;margin:0">{{ step.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS COMPRADORES -->
+  <section id="compradores" style="background:#FBEEE6;padding:clamp(48px,7vw,88px) 20px">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 340px;min-width:280px">
+        <div style="font-weight:600;font-size:13px;color:#C6491A;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Para compradores</div>
+        <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,36px);letter-spacing:-0.01em;margin:0 0 16px">Ahorra las horas que gastas buscando en Gamarra</h2>
+        <p style="font-size:16px;line-height:1.6;color:#4A4438;max-width:460px;margin:0 0 24px">Cuenta qué necesitas una sola vez. Los vendedores que lo tienen te escriben directo con su oferta — tú comparas y decides.</p>
+        <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:inline-block;background:#E85A22;color:#fff;font-weight:600;font-size:15px;padding:14px 22px;border-radius:10px">Pedir por WhatsApp</a>
+      </div>
+      <div style="flex:1 1 340px;min-width:280px;display:grid;gap:14px">
+        <sc-for list="{{ buyerBenefits }}" as="b" hint-placeholder-count="4">
+          <div style="background:#fff;border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
+            <div style="width:8px;height:8px;border-radius:50%;background:#E85A22;margin-top:7px;flex-shrink:0"></div>
+            <div>
+              <div style="font-weight:700;font-size:15px">{{ b.title }}</div>
+              <div style="font-size:14px;color:#4A4438;margin-top:2px">{{ b.body }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS VENDEDORES -->
+  <section id="vendedores" style="background:#EFEDFB;padding:clamp(48px,7vw,88px) 20px">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap-reverse;gap:48px;align-items:center">
+      <div style="flex:1 1 340px;min-width:280px;display:grid;gap:14px">
+        <sc-for list="{{ sellerBenefits }}" as="b" hint-placeholder-count="4">
+          <div style="background:#fff;border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start">
+            <div style="width:8px;height:8px;border-radius:50%;background:#5B4DE6;margin-top:7px;flex-shrink:0"></div>
+            <div>
+              <div style="font-weight:700;font-size:15px">{{ b.title }}</div>
+              <div style="font-size:14px;color:#4A4438;margin-top:2px">{{ b.body }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:1 1 340px;min-width:280px">
+        <div style="font-weight:600;font-size:13px;color:#5B4DE6;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Para vendedores</div>
+        <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,36px);letter-spacing:-0.01em;margin:0 0 16px">Pedidos reales, no más tráfico de pasillo</h2>
+        <p style="font-size:16px;line-height:1.6;color:#4A4438;max-width:460px;margin:0 0 10px">Solo te llegan solicitudes de gente que ya quiere comprar justo lo que vendes. Respondes cuando quieres, desde tu celular.</p>
+        <p style="font-size:14px;color:#5B4DE6;font-weight:600;margin:0 0 24px">Al lanzamiento, te damos créditos de regalo para que lo pruebes sin costo.</p>
+        <a href="#registro-vendedor" style="display:inline-block;background:#5B4DE6;color:#fff;font-weight:600;font-size:15px;padding:14px 22px;border-radius:10px">Registrarme como vendedor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP + APP -->
+  <section id="whatsapp-app" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,96px) 20px">
+    <div style="text-align:center;max-width:620px;margin:0 auto 44px">
+      <div style="font-weight:600;font-size:13px;color:#5B4DE6;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Dos formas de empezar</div>
+      <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);letter-spacing:-0.01em;margin:0">Empieza por WhatsApp. Crece con la app.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      <div style="border:1.5px solid rgba(33,29,24,0.1);border-radius:18px;padding:32px;background:#fff">
+        <div style="width:46px;height:46px;border-radius:12px;background:#E85A22;margin-bottom:18px"></div>
+        <h3 style="font-size:19px;font-weight:700;margin:0 0 10px">WhatsApp</h3>
+        <p style="font-size:15px;line-height:1.6;color:#4A4438;margin:0 0 16px">No necesitas instalar nada. Escribe tu pedido como le escribirías a un amigo y recibe ofertas ahí mismo.</p>
+        <a href="{{ waLink }}" target="_blank" rel="noopener" style="font-weight:600;font-size:14.5px;color:#E85A22">Escribir ahora →</a>
+      </div>
+      <div style="border:1.5px solid rgba(33,29,24,0.1);border-radius:18px;padding:32px;background:#fff">
+        <div style="width:46px;height:46px;border-radius:12px;background:#5B4DE6;margin-bottom:18px"></div>
+        <h3 style="font-size:19px;font-weight:700;margin:0 0 10px">App PATI</h3>
+        <p style="font-size:15px;line-height:1.6;color:#4A4438;margin:0 0 16px">Ideal si compras seguido o si vendes: guarda tus solicitudes, gestiona ofertas y administra tus créditos.</p>
+        <div id="descargar" style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="#" style="font-weight:600;font-size:13.5px;background:#211D18;color:#fff;padding:9px 14px;border-radius:8px">App Store</a>
+          <a href="#" style="font-weight:600;font-size:13.5px;background:#211D18;color:#fff;padding:9px 14px;border-radius:8px">Google Play</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMARRA -->
+  <section id="gamarra" style="background:#211D18;color:#fff;padding:clamp(48px,7vw,96px) 20px">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:44px;align-items:center">
+      <div style="flex:1 1 380px;min-width:280px">
+        <div style="font-weight:600;font-size:13px;color:#FF8A57;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Nuestro punto de partida</div>
+        <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);letter-spacing:-0.01em;margin:0 0 16px">Empezamos en Gamarra, donde nace la necesidad</h2>
+        <p style="font-size:16px;line-height:1.65;color:rgba(255,255,255,0.72);margin:0 0 16px;max-width:460px">Gamarra mueve miles de compras al día, pero encontrar lo que buscas ahí toma tiempo. PATI conecta esa demanda con los comerciantes que ya la atienden, sin cambiarles la forma de vender.</p>
+        <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,0.55);margin:0;max-width:460px">Validamos primero en Gamarra antes de crecer a otras zonas comerciales de Lima.</p>
+      </div>
+      <div style="flex:1 1 340px;min-width:260px">
+        <div style="border-radius:18px;overflow:hidden;aspect-ratio:4/3">
+          <x-import component-from-global-scope="image-slot" from="js/image-slot.js" id="gamarra-photo" src="images/gamarra-photo.webp" shape="rect" placeholder="Foto: pasillos / comerciantes de Gamarra" hint-size="100%,100%" style="width:100%;height:100%"></x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALIDACION -->
+  <section id="validacion" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,96px) 20px">
+    <div style="text-align:center;max-width:640px;margin:0 auto 44px">
+      <div style="font-weight:600;font-size:13px;color:#5B4DE6;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Validación temprana</div>
+      <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);letter-spacing:-0.01em;margin:0 0 14px">Todavía estamos empezando, sin humo</h2>
+      <p style="font-size:16px;line-height:1.6;color:#4A4438;margin:0">Preferimos contarte dónde estamos de verdad, en vez de inventar cifras que aún no tenemos.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+      <sc-for list="{{ validationPoints }}" as="v" hint-placeholder-count="3">
+        <div style="background:#F4F1EB;border-radius:16px;padding:26px">
+          <p style="font-size:15.5px;line-height:1.6;color:#332E27;margin:0">{{ v.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#F4F1EB;padding:clamp(48px,7vw,96px) 20px">
+    <div style="max-width:760px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:40px">
+        <div style="font-weight:600;font-size:13px;color:#5B4DE6;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px">Preguntas frecuentes</div>
+        <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,34px);letter-spacing:-0.01em;margin:0">Dudas rápidas, respuestas directas</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="6">
+          <div style="background:#fff;border-radius:12px;border:1px solid rgba(33,29,24,0.08);overflow:hidden">
+            <button sc-camel-on-click="{{ faq.toggle }}" style="width:100%;background:none;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left">
+              <span style="font-weight:600;font-size:15.5px">{{ faq.q }}</span>
+              <span style="font-size:20px;color:#5B4DE6;flex-shrink:0">{{ faq.icon }}</span>
+            </button>
+            <sc-if value="{{ faq.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;padding:0 20px 18px;font-size:14.5px;line-height:1.6;color:#4A4438">{{ faq.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="background:linear-gradient(135deg,#E85A22,#5B4DE6);padding:clamp(56px,8vw,100px) 20px;text-align:center">
+    <h2 style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4.4vw,42px);color:#fff;letter-spacing:-0.01em;margin:0 0 14px">Tu próxima compra en Gamarra empieza con un mensaje</h2>
+    <p style="font-size:17px;color:rgba(255,255,255,0.9);max-width:520px;margin:0 auto 30px">Pide lo que necesitas hoy, o súmate como vendedor y empieza a recibir pedidos reales.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="background:#fff;color:#211D18;font-weight:700;font-size:16px;padding:16px 28px;border-radius:12px">Escribir por WhatsApp</a>
+      <a href="#registro-vendedor" style="background:rgba(0,0,0,0.2);border:1.5px solid rgba(255,255,255,0.5);color:#fff;font-weight:700;font-size:16px;padding:16px 28px;border-radius:12px">Registrarme como vendedor</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:clamp(48px,6vw,72px) 20px 32px;background:#F4F1EB">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(33,29,24,0.1)">
+        <div>
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+            <img src="images/pati-logo.png" alt="PATI" style="width:28px;height:28px;object-fit:contain">
+            <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:17px;color:#211D18">PATI</span>
+          </div>
+          <p style="font-size:13.5px;line-height:1.6;color:#6B6355;margin:0;max-width:220px">Conectamos compradores y vendedores de Gamarra a partir de una sola solicitud.</p>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#9B9284;margin-bottom:16px">Producto</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <a href="#como-funciona" style="font-size:14px;color:#4A4438">Cómo funciona</a>
+            <a href="#compradores" style="font-size:14px;color:#4A4438">Para compradores</a>
+            <a href="#vendedores" style="font-size:14px;color:#4A4438">Para vendedores</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#9B9284;margin-bottom:16px">Recursos</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <a href="#gamarra" style="font-size:14px;color:#4A4438">Gamarra</a>
+            <a href="#validacion" style="font-size:14px;color:#4A4438">Validación temprana</a>
+            <a href="#faq" style="font-size:14px;color:#4A4438">Preguntas frecuentes</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#9B9284;margin-bottom:16px">Contacto</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <a href="{{ waLink }}" target="_blank" rel="noopener" style="font-size:14px;color:#4A4438">Escribir por WhatsApp</a>
+            <a href="#vendedores" style="font-size:14px;color:#4A4438">Registrarme como vendedor</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:24px">
+        <p style="margin:0;font-size:13px;color:#9B9284">© 2026 PATI · Gamarra, Lima, Perú</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{},&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;urgencia&quot;,&quot;options&quot;:[&quot;urgencia&quot;,&quot;claridad&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;51987654321&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;}}">
+class Component extends DCLogic {
+  state = {
+    isMobile: typeof window !== 'undefined' ? window.innerWidth < 760 : false,
+    openFaq: 0,
+    activeSection: 'como-funciona'
+  };
+
+  navSections = ['como-funciona', 'compradores', 'vendedores', 'gamarra', 'faq'];
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ isMobile: window.innerWidth < 760 });
+    window.addEventListener('resize', this._onResize);
+    this._onScroll = () => {
+      const probeY = 140;
+      let current = this.navSections[0];
+      for (const id of this.navSections) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= probeY) current = id;
+      }
+      if (current !== this.state.activeSection) this.setState({ activeSection: current });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('scroll', this._onScroll);
+  }
+
+  steps = [
+    { n: '1', title: 'Cuenta qué necesitas', body: 'Describe el producto que buscas en un mensaje, por WhatsApp o desde la app.', color: '#E85A22', shadow: 'rgba(232,90,34,0.45)', imgId: 'step-1-shot', imgSrc: 'images/step-1-shot.webp', imgPlaceholder: 'Captura: escribir solicitud' },
+    { n: '2', title: 'Los vendedores de Gamarra se enteran', body: 'Solo llega a los negocios que venden justo eso, no a toda la galería.', color: '#211D18', shadow: 'rgba(33,29,24,0.35)', imgId: 'step-2-shot', imgSrc: 'images/step-2-shot.webp', imgPlaceholder: 'Captura: notificación al vendedor' },
+    { n: '3', title: 'Recibes ofertas y eliges', body: 'Compara precios y condiciones, y decides con quién comprar.', color: '#5B4DE6', shadow: 'rgba(91,77,230,0.45)', imgId: 'step-3-shot', imgSrc: 'images/step-3-shot.webp', imgPlaceholder: 'Captura: lista de ofertas' }
+  ];
+
+  buyerBenefits = [
+    { title: 'Ahorra tiempo', body: 'Olvídate de caminar galería por galería buscando lo mismo.' },
+    { title: 'Compara sin presión', body: 'Recibes varias ofertas y decides con calma, sin regatear en persona.' },
+    { title: 'Empieza por WhatsApp', body: 'No necesitas descargar nada para hacer tu primer pedido.' },
+    { title: 'Es gratis', body: 'Comprar en PATI no tiene ningún costo para ti.' }
+  ];
+
+  sellerBenefits = [
+    { title: 'Oportunidades reales', body: 'Solo te llegan pedidos de personas que ya quieren comprar lo que vendes.' },
+    { title: 'Responde desde tu celular', body: 'Sin dejar tu puesto ni contratar a nadie más.' },
+    { title: 'Créditos promocionales', body: 'Al lanzamiento te regalamos créditos para que pruebes PATI sin gastar.' },
+    { title: 'Más alcance', body: 'Llega a compradores que hoy no pasan frente a tu tienda.' }
+  ];
+
+  validationPoints = [
+    { text: 'Conversamos con decenas de comerciantes de Gamarra antes de lanzar, para entender cómo venden hoy.' },
+    { text: 'La app ya está desarrollada y en pruebas activas con vendedores reales del emporio.' },
+    { text: 'La reacción inicial fue positiva: los comerciantes quieren más pedidos, no otra app complicada de usar.' }
+  ];
+
+  faqData = [
+    { q: '¿Qué es PATI?', a: 'Una plataforma que conecta a compradores y vendedores de Gamarra: pides lo que necesitas y los vendedores que lo tienen te responden con ofertas.' },
+    { q: '¿Tengo que descargar la app para comprar?', a: 'No. Puedes empezar directo por WhatsApp, sin instalar nada. La app es útil si compras seguido o si eres vendedor.' },
+    { q: '¿Cuánto cuesta para compradores?', a: 'Nada. Usar PATI para comprar es completamente gratis.' },
+    { q: '¿Cómo gana dinero un vendedor si usa PATI?', a: 'No pagas por tener tu tienda en PATI. Solo usas créditos cuando decides responder a una solicitud con una oferta.' },
+    { q: '¿Qué pasa si me quedo sin créditos?', a: 'Puedes seguir viendo las solicitudes, pero necesitas créditos para enviar una oferta. Al lanzamiento damos créditos de regalo.' },
+    { q: '¿PATI solo funciona en Gamarra?', a: 'Por ahora sí. Estamos validando ahí antes de expandirnos a otras zonas comerciales de Lima.' }
+  ];
+
+  renderVals() {
+    const whatsappNumber = this.props.whatsappNumber ?? '51987654321';
+    const waLink = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent('Hola, quiero pedir algo en Gamarra');
+    const heroVariant = this.props.heroVariant ?? 'urgencia';
+    const heroHeadline = heroVariant === 'claridad'
+      ? 'Gamarra, pero sin perderte buscando.'
+      : 'Pide lo que buscas. Recibe ofertas de Gamarra en minutos.';
+    const heroSub = heroVariant === 'claridad'
+      ? 'Cuéntanos qué necesitas. Los vendedores que lo tienen te escriben con su oferta. Tú eliges.'
+      : 'PATI conecta compradores con vendedores de Gamarra a partir de una sola solicitud, sin caminar de tienda en tienda.';
+
+    const navLabels = { 'como-funciona': 'Cómo funciona', compradores: 'Compradores', vendedores: 'Vendedores', gamarra: 'Gamarra', faq: 'Preguntas' };
+    const navLinks = this.navSections.map(id => ({
+      href: '#' + id,
+      label: navLabels[id],
+      textColor: this.state.activeSection === id ? '#211D18' : '#4A4438',
+      dotOpacity: this.state.activeSection === id ? 1 : 0,
+      dotScale: this.state.activeSection === id ? 1 : 0.4,
+      onClick: () => this.setState({ activeSection: id })
+    }));
+
+    return {
+      isMobile: this.state.isMobile,
+      headerPosition: this.state.isMobile ? 'static' : 'sticky',
+      heroPhoneWidth: 300,
+      heroPhoneHeight: 620,
+      navLinks,
+      waLink,
+      heroHeadline,
+      heroSub,
+      steps: this.steps,
+      buyerBenefits: this.buyerBenefits,
+      sellerBenefits: this.sellerBenefits,
+      validationPoints: this.validationPoints,
+      faqs: this.faqData.map((f, i) => ({
+        q: f.q,
+        a: f.a,
+        open: this.state.openFaq === i,
+        icon: this.state.openFaq === i ? '−' : '+',
+        toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }))
+      }))
+    };
+  }
+}
+</script>
+
+
+</body></html>
