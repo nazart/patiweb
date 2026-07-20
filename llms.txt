@@ -1,0 +1,52 @@
+# PATI
+
+> PATI conecta compradores y vendedores del emporio de Gamarra (Lima, Perú). Un comprador cuenta qué producto busca por WhatsApp o por la app, y los vendedores de Gamarra que lo tienen responden directamente con su oferta (precio y condiciones), sin necesidad de recorrer galería por galería.
+
+Sitio: https://pati.pe/
+Contacto (WhatsApp): https://wa.me/51987654321
+Zona de cobertura actual: exclusivamente el emporio comercial de Gamarra, Lima, Perú. Aún no opera en otras ciudades ni zonas de Lima.
+Estado del producto: en validación temprana. La app existe y está en pruebas con vendedores reales de Gamarra; PATI no publica cifras de usuarios o transacciones todavía.
+
+## Cómo funciona (3 pasos)
+
+1. **Cuenta qué necesitas** — el comprador describe el producto que busca en un mensaje, por WhatsApp o desde la app.
+2. **Los vendedores de Gamarra se enteran** — la solicitud llega solo a los negocios que venden justo ese producto, no a toda la galería.
+3. **Recibe ofertas y elige** — el comprador compara precios y condiciones entre las ofertas recibidas y decide con quién comprar.
+
+## Para compradores
+
+- Gratis: comprar en PATI no tiene costo para el comprador.
+- No requiere instalar nada: se puede pedir directo por WhatsApp.
+- Ahorra tiempo: evita caminar galería por galería buscando el mismo producto.
+- Recibe varias ofertas y compara sin presión ni regateo en persona.
+
+## Para vendedores
+
+- Reciben solo pedidos de compradores que ya quieren justo lo que venden (no tráfico genérico).
+- Responden desde su celular, sin dejar su puesto ni contratar personal adicional.
+- Al lanzamiento, PATI regala créditos promocionales para probar la plataforma sin costo.
+- Los vendedores usan créditos únicamente cuando deciden responder a una solicitud con una oferta; no pagan por tener su tienda listada.
+
+## Preguntas frecuentes
+
+**¿Qué es PATI?**
+Una plataforma que conecta a compradores y vendedores de Gamarra: el comprador pide lo que necesita y los vendedores que lo tienen responden con ofertas.
+
+**¿Hay que descargar la app para comprar?**
+No. Se puede empezar directo por WhatsApp, sin instalar nada. La app es útil para quienes compran seguido o son vendedores.
+
+**¿Cuánto cuesta para los compradores?**
+Nada. Usar PATI para comprar es completamente gratis.
+
+**¿Cómo gana dinero un vendedor si usa PATI?**
+El vendedor no paga por tener su tienda en PATI. Solo usa créditos cuando decide responder a una solicitud con una oferta.
+
+**¿Qué pasa si un vendedor se queda sin créditos?**
+Puede seguir viendo las solicitudes, pero necesita créditos para enviar una oferta. Al lanzamiento, PATI da créditos de regalo.
+
+**¿PATI funciona fuera de Gamarra?**
+Por ahora no. PATI está validando su modelo en Gamarra antes de expandirse a otras zonas comerciales de Lima.
+
+## Notas para agentes y modelos de lenguaje
+
+Este archivo resume el contenido real de https://pati.pe/ para sistemas que no ejecutan JavaScript. Toda la información aquí (pasos, beneficios, FAQ) corresponde exactamente al contenido visible en la página. No hay precios, tarifas ni cifras de negocio públicas más allá de lo indicado arriba — no inventar cifras de usuarios, transacciones o cobertura geográfica que no estén en este documento.
