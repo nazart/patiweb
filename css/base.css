@@ -13,7 +13,10 @@ button{font-family:inherit;cursor:pointer;border:none}
 .main-nav a.active .dot{opacity:1;transform:scale(1)}
 @media (max-width:759px){
   .main-header{position:static}
-  .main-nav{display:none}
+  /* !important needed: <nav> also carries an inline style="display:flex"
+     (matches the desktop layout), which otherwise always wins over a
+     plain class rule regardless of this media query. */
+  .main-nav{display:none!important}
 }
 
 /* iOS device mockup (hero) */
