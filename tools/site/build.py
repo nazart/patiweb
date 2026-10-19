@@ -3,6 +3,8 @@ Uso: python3 tools/site/build.py   (o pasando otra carpeta de salida como argume
 Todo el contenido queda como HTML real en cada archivo; el deploy no ejecuta ningún build:
 se corre este script, se revisa el resultado y se hace commit de web/."""
 import json, os, re, sys, html, urllib.parse
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pati_icons import icon  # íconos propios (reemplazan a los emojis)
 from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -115,7 +117,7 @@ def footer():
       <nav aria-label="Pati"><b>Pati</b><a href="/nosotros/">Nosotros</a><a href="/novedades/">Novedades</a><a href="/contacto/">Contacto</a></nav>
       <nav aria-label="Legal"><b>Legal</b><a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a><a href="/libro-de-reclamaciones/">Libro de Reclamaciones</a></nav>
     </div>
-    <span>Hecho en Perú 🇵🇪 · <a href="mailto:%s">%s</a> · WhatsApp %s</span>
+    <span>Hecho en Perú [[ico:peru:flag]] · <a href="mailto:%s">%s</a> · WhatsApp %s</span>
     <span>© 2026 %s · RUC %s · %s</span>
   </div>
 </footer>''' % (MARK, EMAIL, EMAIL, WA_HUMAN, LEGAL["name"], LEGAL["ruc"], LEGAL["address"])
@@ -188,6 +190,7 @@ def page(path, title, desc, body, show_header=True, extra_ld=None, robots="index
 </html>
 '''.format(title=esc(title), desc=esc(desc), robots=robots, canon=canon, site=SITE, ld=ld,
            header=header(show_header), body=body.strip(), footer=footer())
+    doc = re.sub(r"\[\[ico:(\w+)(?::([\w-]+))?\]\]", lambda m: icon(m.group(1), m.group(2) or "ico"), doc)
     out = os.path.join(ROOT, path.strip("/"), "index.html") if path.endswith("/") and path != "/" else os.path.join(ROOT, "index.html" if path == "/" else path.strip("/"))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w").write(doc)
@@ -213,7 +216,7 @@ HOME = '''
   <div class="wrap">
     <div>
       <a class="lockup" href="/" aria-label="Pati">{mark}<b>pati</b></a>
-      <span class="made-chip">Pa' ti, pe 🇵🇪</span>
+      <span class="made-chip">Pa' ti, pe [[ico:peru:flag]]</span>
       <h1>Pide una vez. <mark>Te mandan precios.</mark></h1>
       <p class="sub">Cuenta qué quieres comprar y los vendedores te mandan su precio. Tú eliges. Gratis, pe.</p>
       <div class="ctas">
@@ -294,12 +297,12 @@ HOME = '''
         <p class="big big-sm">Siempre tendrás créditos gratis.</p>
         <p>Cada oferta que envías usa créditos. Si necesitas más, los compras o los ganas:</p>
         <div class="earn">
-          <div><em aria-hidden="true">🎁</em><p><b>Comparte tu código</b><span>Ganas cuando alguien se registra con él.</span></p></div>
-          <div><em aria-hidden="true">💬</em><p><b>Atiende a compradores</b><span>Ganas cuando interactúas con ellos.</span></p></div>
+          <div><em>[[ico:gift]]</em><p><b>Comparte tu código</b><span>Ganas cuando alguien se registra con él.</span></p></div>
+          <div><em>[[ico:chat]]</em><p><b>Atiende a compradores</b><span>Ganas cuando interactúas con ellos.</span></p></div>
         </div>
       </article>
     </div>
-    <p class="promise">Si algo cambia, te lo contamos primero a ti.</p>
+    <p class="promise">[[ico:megaphone]]<span>Si algo cambia, te lo contamos primero a ti.</span></p>
   </div>
 </section>
 
@@ -462,7 +465,7 @@ page("/libro-de-reclamaciones/", "Libro de Reclamaciones · Pati",
 def founder_cards():
     out = []
     for f in FOUNDERS:
-        out.append('''      <article class="person big">%s<div><h3>%s</h3><span class="role">%s</span><p>%s</p><span class="game">🎮 Su juego: %s</span><a class="in" href="%s" rel="noopener" target="_blank">%sLinkedIn</a></div></article>''' % (
+        out.append('''      <article class="person big">%s<div><h3>%s</h3><span class="role">%s</span><p>%s</p><span class="game">[[ico:game:ico-sm]] Su juego: %s</span><a class="in" href="%s" rel="noopener" target="_blank">%sLinkedIn</a></div></article>''' % (
             avatar(f), f["name"], f["role"], f["line"], f["game"], esc(f["linkedin"]), social_icon("LinkedIn"))
             if f.get("game") else
             '''      <article class="person big">%s<div><h3>%s</h3><span class="role">%s</span><p>%s</p><a class="in" href="%s" rel="noopener" target="_blank">%sLinkedIn</a></div></article>''' % (
@@ -512,10 +515,10 @@ ABOUT = '''
 {founders}
     </div>
     <div class="facts" aria-label="Datos curiosos">
-      <span>🎮 StarCraft y FIFA, nuestros juegos</span>
-      <span>💻 Amamos programar</span>
-      <span>🤝 2 años trabajando juntos antes de Pati</span>
-      <span>🇵🇪 Hechos en Perú</span>
+      <span>[[ico:game:ico-sm]]StarCraft y FIFA, nuestros juegos</span>
+      <span>[[ico:code:ico-sm]]Amamos programar</span>
+      <span>[[ico:duo:ico-sm]]2 años trabajando juntos antes de Pati</span>
+      <span>[[ico:peru:ico-sm]]Hechos en Perú</span>
     </div>
   </div>
 </section>
@@ -563,10 +566,10 @@ CONTACT_PAGE = '''
   <div class="wrap">
     <h2 class="h2 h2-sm">¿Qué necesitas?</h2>
     <div class="channels">
-      <article class="card"><span class="ch-ico" aria-hidden="true">📱</span><h3>Uso la app o tengo un problema</h3><p>Te ayudamos por WhatsApp.</p><a class="btn wa" href="{wa_help}">{icon_wa}Escribir por WhatsApp</a></article>
-      <article class="card"><span class="ch-ico" aria-hidden="true">💡</span><h3>Tengo una idea para Pati</h3><p>Nos encanta. Las mejores entran a la hoja de ruta.</p><a class="btn wa" href="{wa_idea}">{icon_wa}Contar mi idea</a></article>
-      <article class="card"><span class="ch-ico" aria-hidden="true">🤝</span><h3>Prensa, alianzas o inversión</h3><p>Escríbenos al correo o directo a los fundadores.</p><a class="btn" href="mailto:{email}">{email}</a><div class="in-row">{linkedins}</div></article>
-      <article class="card"><span class="ch-ico" aria-hidden="true">📘</span><h3>Quiero presentar un reclamo</h3><p>Usa nuestro Libro de Reclamaciones.</p><a class="btn light" href="/libro-de-reclamaciones/">Ir al Libro de Reclamaciones</a></article>
+      <article class="card"><span class="ch-ico">[[ico:phone]]</span><h3>Uso la app o tengo un problema</h3><p>Te ayudamos por WhatsApp.</p><a class="btn wa" href="{wa_help}">{icon_wa}Escribir por WhatsApp</a></article>
+      <article class="card"><span class="ch-ico">[[ico:idea]]</span><h3>Tengo una idea para Pati</h3><p>Nos encanta. Las mejores entran a la hoja de ruta.</p><a class="btn wa" href="{wa_idea}">{icon_wa}Contar mi idea</a></article>
+      <article class="card"><span class="ch-ico">[[ico:brief]]</span><h3>Prensa, alianzas o inversión</h3><p>Escríbenos al correo o directo a los fundadores.</p><a class="btn" href="mailto:{email}">{email}</a><div class="in-row">{linkedins}</div></article>
+      <article class="card"><span class="ch-ico">[[ico:book]]</span><h3>Quiero presentar un reclamo</h3><p>Usa nuestro Libro de Reclamaciones.</p><a class="btn light" href="/libro-de-reclamaciones/">Ir al Libro de Reclamaciones</a></article>
     </div>
   </div>
 </section>

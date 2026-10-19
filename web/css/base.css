@@ -478,3 +478,14 @@ img.avatar{object-fit:cover;background:#fff}
   .path{grid-template-columns:repeat(3,1fr)}
   .person.big{grid-template-columns:140px 1fr;align-items:center}
 }
+
+/* ---------- íconos propios (tools/site/pati_icons.py) ---------- */
+.ico{display:block;width:100%;height:100%}
+.ico-sm{width:22px;height:22px;flex:none}
+.flag{display:inline-block;width:1.35em;height:1.35em;vertical-align:-.38em;margin-left:.15em}
+.earn em{background:#fff;padding:6px}
+.ch-ico{display:grid;place-items:center;width:60px;height:60px;border-radius:16px;background:var(--paper);border:2px solid var(--line);box-shadow:3px 3px 0 var(--line);padding:8px}
+.facts span{display:inline-flex;align-items:center;gap:8px}
+.person .game{display:inline-flex;align-items:center;gap:6px}
+.promise::before{content:none}
+.promise .ico{width:40px;height:40px;flex:none;margin-top:-6px}
