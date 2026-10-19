@@ -224,7 +224,7 @@ HOME = '''
     </div>
 
     <div class="phone" role="img" aria-label="Ejemplo ilustrativo: un pedido de 20 polos estampados recibe tres ofertas en Pati">
-      <span class="best" aria-hidden="true">¡Gratis para ti!</span>
+      <span class="best" aria-hidden="true">¡Gratis pa' ti!</span>
       <div class="screen" data-play aria-hidden="true">
         <div class="msg">Busco <b>20 polos estampados</b> para mi promoción. Los necesito en 2 semanas.</div>
         <div class="offer"><span>Taller de estampado</span><strong>S/ 18</strong><small>Listos en 8 días</small></div>
@@ -256,7 +256,7 @@ HOME = '''
     <h2 class="h2">Hecha para los dos lados.</h2>
     <div class="duo">
       <article class="card">
-        <span class="tag">Si compras</span>
+        <span class="tag">Pa' ti si compras</span>
         <h3>Deja de preguntar en diez tiendas.</h3>
         <ul>
           <li><div><b>Ahorra horas</b><span>Un pedido reemplaza decenas de llamadas y mensajes.</span></div></li>
@@ -266,7 +266,7 @@ HOME = '''
         <a class="btn" href="#descargar">Descargar Pati</a>
       </article>
       <article class="card">
-        <span class="tag tag-orange">Si vendes</span>
+        <span class="tag tag-orange">Pa' ti si vendes</span>
         <h3>Que los clientes te encuentren a ti.</h3>
         <ul>
           <li><div><b>Clientes que ya quieren comprar</b><span>Cada pedido es alguien que necesita lo que vendes.</span></div></li>
@@ -285,12 +285,12 @@ HOME = '''
     <h2 class="h2">Gratis, y te contamos <mark>cómo funciona.</mark></h2>
     <div class="free-grid">
       <article class="card buyer">
-        <span class="tag">Si compras</span>
+        <span class="tag">Pa' ti si compras</span>
         <p class="big">Gratis. Siempre.</p>
         <p>Pedir, recibir ofertas y conversar no te cuesta nada.</p>
       </article>
       <article class="card">
-        <span class="tag tag-orange">Si vendes</span>
+        <span class="tag tag-orange">Pa' ti si vendes</span>
         <p class="big big-sm">Siempre tendrás créditos gratis.</p>
         <p>Cada oferta que envías usa créditos. Si necesitas más, los compras o los ganas:</p>
         <div class="earn">
