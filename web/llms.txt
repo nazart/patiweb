@@ -1,0 +1,81 @@
+# Pati
+
+> Pati es una app peruana y gratuita para comprar y vender: cuentas qué quieres comprar y los vendedores te responden con su precio. Tú comparas y eliges. "pati.pe" se lee "pa' ti, pe".
+
+## Cómo funciona
+
+1. Publica lo que buscas: qué producto, cuántos y para cuándo.
+2. Te llegan precios: tu pedido llega a quienes venden eso y ellos te mandan su oferta.
+3. Comparas y eliges: ves precio, condiciones y tiempo de entrega, conversas y cierras con quien te convenga.
+
+## Cuánto cuesta
+
+- Para quien compra: gratis, siempre.
+- Para quien vende: enviar una oferta usa créditos. Siempre tendrás créditos gratis; si necesitas más, puedes comprarlos. También ganas créditos cuando alguien se registra con tu código o cuando interactúas con compradores.
+- Pati no cobra ni recibe pagos por las compras: el pago se acuerda directamente con el vendedor.
+
+## Disponibilidad
+
+Pati sale en Google Play y App Store el 31 de octubre de 2026.
+
+## Comunidad
+
+Pati se construye en público con su comunidad: publicamos lo que hacemos en TikTok, Instagram, Facebook, YouTube y X, y recibimos ideas por WhatsApp (+51 924 519 233).
+
+## Preguntas frecuentes
+
+**¿Pati es gratis?**
+Para quien compra, sí: siempre. Los vendedores siempre tienen créditos gratis para enviar ofertas; si necesitan más, pueden comprarlos o ganarlos compartiendo su código e interactuando con compradores.
+
+**¿Qué puedo pedir?**
+Lo que quieras comprar a un negocio: ropa, insumos, mercadería, equipos o regalos para un evento. Mientras más claro tu pedido (qué, cuántos y para cuándo), mejores ofertas recibes.
+
+**¿Cómo pago lo que compro?**
+Directamente al vendedor, como acuerden entre ustedes. Pati no cobra ni recibe pagos: si alguien te pide pagar “a Pati”, es un fraude.
+
+**¿Cómo compro seguro?**
+Antes de cerrar ves la oferta completa y conversas con el vendedor. Pide comprobante, prefiere medios de pago con respaldo y desconfía de precios demasiado bajos.
+
+**¿Cómo me registro como vendedor?**
+Descarga la app, crea tu cuenta de negocio y elige tu rubro. Desde ese momento te llegan pedidos y empiezas con créditos gratis.
+
+**¿Cuándo puedo descargar Pati?**
+Pati sale en Google Play y App Store el 31 de octubre de 2026.
+
+**¿Cómo les doy mi opinión?**
+Escríbenos por WhatsApp o coméntanos en nuestras redes. Leemos todo, y las ideas que entran a la lista las contamos públicamente.
+
+## Novedades
+
+- 31 de octubre de 2026: Pati sale en Google Play. La primera versión de Pati para Android llega el 31 de octubre. Es gratis para quien compra y los vendedores empiezan con créditos gratis.
+- 31 de octubre de 2026: Pati sale en App Store. El mismo día llega la versión para iPhone. Así nadie se queda fuera, uses el celular que uses.
+- 16 de octubre de 2026: Nace Pati.pe como empresa. Constituimos Pati.pe (RUC 20616635485). Es el primer paso formal para construir Pati junto con su comunidad.
+
+## Empresa
+
+- Razón social: Pati.pe
+- RUC: 20616635485
+- Domicilio: Los Totorales 163, San Miguel
+- Equipo: Nazart Jara (CEO, https://www.linkedin.com/in/nazartjara/) y Daniel Hervias (CTO, https://www.linkedin.com/in/felix-daniel-hervias-arancibia-1560b5201/).
+
+## Historia
+
+Nazart y Daniel vienen de trabajar en muchas empresas y decidieron fundar Pati después de dos años trabajando juntos. Coinciden en que hay que aportar al país, empezando por las micro y pequeñas empresas, que son el 99% de las empresas del Perú. Les apasionan la tecnología, los negocios, programar y los videojuegos (StarCraft y FIFA). Constituyeron Pati.pe el 16 de octubre de 2026.
+
+Visión: Pati empieza conectando a quien compra con quien vende, pero busca ser un ecosistema empresarial, un conjunto de soluciones que nazcan del dolor real del empresario y se integren en su cadena de valor.
+
+## Contacto
+
+- Correo: hola@pati.pe
+- WhatsApp: +51 924 519 233
+- Horario: lunes a viernes, de 8 a. m. a 8 p. m.
+
+## Páginas
+
+- [Inicio](https://pati.pe/)
+- [Nosotros](https://pati.pe/nosotros/)
+- [Novedades](https://pati.pe/novedades/)
+- [Contacto](https://pati.pe/contacto/)
+- [Política de privacidad](https://pati.pe/privacidad/)
+- [Términos y condiciones](https://pati.pe/terminos/)
+- [Libro de Reclamaciones](https://pati.pe/libro-de-reclamaciones/)

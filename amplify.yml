@@ -1,10 +1,12 @@
+# Monorepo: Amplify solo publica la web estática de web/ (sin build).
+# El backend (backend/ + infra/) se despliega aparte con Pulumi (.github/workflows/backend.yml).
 version: 1
 frontend:
   phases:
     build:
       commands: []
   artifacts:
-    baseDirectory: /
+    baseDirectory: web
     files:
       - '**/*'
   cache:

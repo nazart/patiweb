@@ -1,1 +1,10 @@
 .DS_Store
+
+# herramientas locales de diseño (skills del proyecto y salidas del Taste Skill)
+.agents/
+.taste-skill/
+skills-lock.json
+
+# monorepo: dependencias y compilados del backend/infra
+node_modules/
+infra/bin/

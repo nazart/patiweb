@@ -1,0 +1,10 @@
+{
+  "name": "@pati/contact",
+  "private": true,
+  "type": "module",
+  "description": "Lambda del formulario de contacto de pati.pe",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "engines": { "node": ">=20" }
+}

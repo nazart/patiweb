@@ -1,0 +1,6 @@
+name: pati-contact
+description: Backend del formulario de contacto de pati.pe (API Gateway + Lambda + DynamoDB + SES + Google Sheets)
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm

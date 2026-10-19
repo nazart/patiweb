@@ -1,0 +1,13 @@
+config:
+  aws:region: us-east-1
+  # mock: la Lambda solo valida y registra en logs. live: DynamoDB + correo + hoja.
+  pati-contact:mode: mock
+  pati-contact:domain: pati.pe
+  pati-contact:mailFrom: no-reply@pati.pe
+  pati-contact:mailTo: info@pati.pe
+  pati-contact:allowedOrigins:
+    - https://pati.pe
+    - https://www.pati.pe
+    - https://dev-web.pati.pe
+  # ID de la hoja de Google (de su URL). Vacío hasta crearla y compartirla con la cuenta de servicio.
+  pati-contact:sheetId: ""

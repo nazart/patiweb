@@ -1,0 +1,52 @@
+# Backend del formulario de contacto: tests en cada cambio y despliegue con Pulumi en main.
+# El despliegue queda apagado hasta configurar en GitHub:
+#   variables: DEPLOY_BACKEND=true, AWS_ROLE_ARN (rol OIDC con permisos de despliegue), PULUMI_BACKEND_URL (p. ej. s3://pati-pulumi-state)
+#   secretos:  PULUMI_CONFIG_PASSPHRASE
+name: backend
+
+on:
+  push:
+    branches: [main, staging, dev]
+    paths: ['backend/**', 'infra/**', '.github/workflows/backend.yml']
+  pull_request:
+    paths: ['backend/**', 'infra/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm test
+        working-directory: backend/contact
+      - run: npm ci && npm run typecheck
+        working-directory: infra
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && vars.DEPLOY_BACKEND == 'true'
+    runs-on: ubuntu-latest
+    env:
+      PULUMI_BACKEND_URL: ${{ vars.PULUMI_BACKEND_URL }}
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+      - run: npm ci
+        working-directory: infra
+      - uses: pulumi/actions@v6
+        with:
+          command: up
+          stack-name: prod
+          work-dir: infra
