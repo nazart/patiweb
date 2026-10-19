@@ -8,3 +8,6 @@ skills-lock.json
 # monorepo: dependencias y compilados del backend/infra
 node_modules/
 infra/bin/
+
+# caché de Python del generador
+__pycache__/
