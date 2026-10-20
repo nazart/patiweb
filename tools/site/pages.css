@@ -272,3 +272,37 @@ img.avatar{object-fit:cover;background:#fff}
   .table-wrap td:not(:first-child)::before{content:attr(data-label) ": ";font-weight:700;color:var(--ink)}
   .table-wrap td:first-child{font-size:16.5px}
 }
+
+/* ---------- libro de reclamaciones ---------- */
+.claim-head{display:grid;gap:12px;margin-bottom:18px}
+.claim-head h2{font-size:26px;margin-top:6px}
+.claim-defs{display:grid;gap:6px;margin:0 0 18px;color:var(--ink-2);font-size:15.5px}
+.claim-form{display:grid;gap:18px}
+.claim-form fieldset{border:0;padding:0;margin:0;display:grid;gap:14px}
+.claim-form legend{display:flex;align-items:center;gap:10px;font:800 20px/1.2 var(--font);margin-bottom:6px;padding:0}
+.claim-form legend .n{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--yellow);color:#1E1340;border:2px solid #1E1340;font-size:15px}
+.claim-form label{display:grid;gap:6px;font-weight:700;font-size:16px}
+.claim-form label small{font-weight:500;color:var(--ink-2)}
+.claim-form input:not([type=checkbox]):not([type=radio]),.claim-form select,.claim-form textarea{font:500 16px/1.4 var(--font);color:#1E1340;background:#fff;border:2px solid #1E1340;border-radius:14px;padding:13px 14px;width:100%;min-height:52px}
+.claim-form [aria-invalid="true"]{border-color:#C2261B!important;box-shadow:0 0 0 3px rgba(194,38,27,.15)}
+.claim-form input:focus-visible,.claim-form select:focus-visible,.claim-form textarea:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.claim-form .check{grid-template-columns:24px 1fr;align-items:start;font-weight:500;font-size:15px;color:var(--ink-2)}
+.claim-form .check input{width:22px;height:22px;margin:2px 0 0;accent-color:#1E1340}
+.claim-form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.claim-form .hint{color:var(--ink-2);font-size:15px;font-weight:500}
+.row2{display:grid;gap:14px}
+.guardian{display:none;gap:10px}
+.claim-form:has(#minor:checked) .guardian{display:grid}
+.radios{display:flex;flex-wrap:wrap;gap:10px}
+.radio{display:inline-flex!important;align-items:center;gap:8px;min-height:48px;padding:0 16px;border:2px solid var(--line);border-radius:99px;background:var(--card);cursor:pointer;font-weight:700}
+.radio input{width:20px;height:20px;accent-color:#1E1340;margin:0}
+.radio:has(input:checked){background:var(--yellow);color:#1E1340;border-color:#1E1340}
+.claim-result{display:grid;gap:12px;margin-top:6px}
+.claim-result h2{font-size:28px}
+.claim-actions{display:grid;gap:12px}
+.claim-actions .btn{width:100%}
+.claim-copy{white-space:pre-wrap;font:500 14.5px/1.5 var(--font);background:var(--paper);border:2px dashed var(--line);border-radius:14px;padding:14px;margin:6px 0 0;color:var(--ink);overflow-wrap:anywhere}
+.claim-notes{margin-top:22px;display:grid;gap:8px;color:var(--ink-2);font-size:15px}
+@media (min-width:700px){.row2{grid-template-columns:1fr 1fr}.claim-actions{grid-template-columns:repeat(3,auto);justify-content:start}}
+@media print{.top,footer,.page-hero,.claim-form,.claim-actions,.claim-defs{display:none!important}.claim-result{border:0;box-shadow:none}}
+.claim-result{scroll-margin-top:90px}

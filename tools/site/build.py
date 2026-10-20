@@ -27,6 +27,11 @@ EMAIL = "hola@pati.pe"
 #   "live"     → POST JSON a CONTACT_ENDPOINT (la salida contactEndpoint de `pulumi stack output` en infra/).
 CONTACT_MODE = "simulate"
 CONTACT_ENDPOINT = ""
+# Libro de Reclamaciones:
+#   "email" → la hoja se genera en pantalla y el consumidor la envía por correo o WhatsApp (hasta activar el backend).
+#   "live"  → POST JSON a CLAIMS_ENDPOINT (salida claimsEndpoint de Pulumi): correlativo oficial + copia por correo.
+CLAIMS_MODE = "email"
+CLAIMS_ENDPOINT = ""
 
 FOUNDERS = [
     {"name": "Nazart Jara", "initials": "NJ", "role": "CEO", "slug": "nazart-jara",
@@ -414,21 +419,8 @@ page("/eliminar-cuenta/", "Eliminar tu cuenta · Pati",
      inner("Eliminar tu cuenta.", "Desde la app o pidiéndonoslo, cuando quieras.") + legal.delete_account(EMAIL, _wa_del, WA_HUMAN).replace("[[wa]]", ICON_WA))
 
 page("/libro-de-reclamaciones/", "Libro de Reclamaciones · Pati",
-     "Libro de Reclamaciones virtual de Pati.pe, conforme al Código de Protección y Defensa del Consumidor.",
-     inner("Libro de Reclamaciones.", "Conforme al Código de Protección y Defensa del Consumidor (Ley N.º 29571).") + '''
-<section class="trust">
-  <div class="wrap prose">
-    <h2>Datos del proveedor</h2>
-    {legal}
-    <div class="card notice" style="margin-top:32px">
-      <h2>Presenta tu reclamo o queja</h2>
-      <p><strong>Reclamo:</strong> disconformidad con un producto o servicio. <strong>Queja:</strong> disconformidad con la atención recibida.</p>
-      <p>Mientras habilitamos el formulario en línea, escríbenos por WhatsApp con tu nombre, documento de identidad, el detalle de lo ocurrido y lo que solicitas. Te enviaremos una constancia y responderemos en un plazo máximo de 15 días hábiles.</p>
-      <a class="btn wa" href="{wa}">{icon}Presentar por WhatsApp</a>
-    </div>
-    <!-- PENDIENTE: insertar aquí el formulario oficial (por ejemplo, Tally) antes de pasar a producción. -->
-  </div>
-</section>'''.format(legal=LEGAL_BLOCK, icon=ICON_WA, wa=esc(wa("Hola Pati, quiero presentar un reclamo/queja. Nombre: · DNI: · Detalle: · Pedido:", "libro-reclamaciones"))))
+     "Libro de Reclamaciones virtual de Pati.pe: presenta tu reclamo o queja conforme al Código de Protección y Defensa del Consumidor.",
+     inner("Libro de Reclamaciones.", "Conforme al Código de Protección y Defensa del Consumidor (Ley N.º 29571).") + legal.claims_book(LEGAL, EMAIL, CLAIMS_MODE, CLAIMS_ENDPOINT, esc))
 
 # 404 (Amplify la sirve si se configura la regla 404 en la consola)
 # ----------------------------------------------------------------- nosotros
@@ -719,6 +711,9 @@ open(os.path.join(ROOT, "js", "site.js"), "w").write("""// Única JS del sitio. 
   els.forEach(function (el) { ro.observe(el); });
 })();
 """)
+with open(os.path.join(ROOT, "js", "site.js"), "a") as _f:
+    _f.write(open(os.path.join(HERE, "claims.js")).read())
+
 
 # ----------------------------------------------------------------- llms.txt y sitemap
 llms = """# Pati

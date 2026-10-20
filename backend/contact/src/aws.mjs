@@ -4,6 +4,7 @@ import { createSign } from 'node:crypto';
 import { DynamoDBClient, PutItemCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb';
 import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager';
+import { claimText } from './claims.mjs';
 
 const S = (v) => ({ S: String(v ?? '') });
 
@@ -12,7 +13,26 @@ export async function makeAwsDeps(env) {
   const ses = new SESv2Client({});
   const table = env.TABLE_NAME;
 
+  const provider = { name: env.PROVIDER_NAME, ruc: env.PROVIDER_RUC, address: env.PROVIDER_ADDRESS };
+
   const store = {
+    // Correlativo anual del Libro de Reclamaciones (contador atómico en DynamoDB).
+    async nextClaimNumber(year) {
+      const out = await ddb.send(new UpdateItemCommand({
+        TableName: table,
+        Key: { pk: S(`counter#claims#${year}`) },
+        UpdateExpression: 'ADD seq :one',
+        ExpressionAttributeValues: { ':one': { N: '1' } },
+        ReturnValues: 'UPDATED_NEW',
+      }));
+      return Number(out.Attributes.seq.N);
+    },
+    // Las hojas se conservan (sin TTL): el reglamento exige guardarlas al menos 2 años.
+    async saveClaim(c) {
+      const item = { pk: S(`claim#${c.number}`) };
+      for (const [k, v] of Object.entries(c)) item[k] = S(v);
+      await ddb.send(new PutItemCommand({ TableName: table, ConditionExpression: 'attribute_not_exists(pk)', Item: item }));
+    },
     async save(m) {
       await ddb.send(new PutItemCommand({
         TableName: table,
@@ -56,13 +76,26 @@ export async function makeAwsDeps(env) {
     },
   };
 
+  // Copia de la Hoja de Reclamación al consumidor (obligatoria) y aviso a Pati.
+  mailer.sendClaim = async (c) => {
+    await ses.send(new SendEmailCommand({
+      FromEmailAddress: env.MAIL_FROM,
+      Destination: { ToAddresses: [c.email], BccAddresses: [env.MAIL_TO] },
+      ReplyToAddresses: [env.MAIL_TO],
+      Content: { Simple: { Subject: { Data: `Hoja de Reclamación ${c.number} · Pati`, Charset: 'UTF-8' }, Body: { Text: { Data: claimText(c, provider), Charset: 'UTF-8' } } } },
+    }));
+  };
+
   const sheet = await makeSheet(env);
   return { store, limiter, mailer, sheet };
 }
 
 // Agrega una fila a la hoja de Google con una cuenta de servicio (JWT RS256 → token OAuth).
 async function makeSheet(env) {
-  if (!env.GOOGLE_SECRET_ARN || !env.SHEET_ID) return { append: async () => { throw new Error('google_not_configured'); } };
+  if (!env.GOOGLE_SECRET_ARN || !env.SHEET_ID) {
+    const off = async () => { throw new Error('google_not_configured'); };
+    return { append: off, appendClaim: off };
+  }
   const sm = new SecretsManagerClient({});
   let sa; let token = { value: '', exp: 0 };
 
@@ -87,7 +120,21 @@ async function makeSheet(env) {
   // Evita que un texto que empiece con = + - @ se interprete como fórmula al abrir la hoja.
   const cell = (v) => (/^[=+\-@]/.test(String(v)) ? `'${v}` : String(v ?? ''));
 
+  async function appendRow(tab, cols, row) {
+    const range = encodeURIComponent(`${tab}!A:${cols}`);
+    const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${env.SHEET_ID}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${await accessToken()}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ values: [row.map(cell)] }),
+    });
+    if (!res.ok) throw new Error(`google_append_${res.status}`);
+  }
+
   return {
+    async appendClaim(c) {
+      await appendRow('Reclamos', 'R', [c.number, c.createdAt, c.claimType, c.name, c.docType, c.docNumber, c.address, c.phone, c.email,
+        c.isMinor ? `${c.guardianName} (${c.guardianDoc})` : '', c.itemType, c.amount, c.itemDescription, c.detail, c.request, 'pendiente', '', '']);
+    },
     async append(m) {
       const range = encodeURIComponent(`${env.SHEET_TAB || 'Mensajes'}!A:I`);
       const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${env.SHEET_ID}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`, {

@@ -43,13 +43,15 @@ playwright.config.ts  package.json # root: test scripts (npm test) and Playwrigh
 tools/site/                        # generator (not deployed)
   build.py                         # ALL copy and data live here (FAQ, NEWS, FOUNDERS, LEGAL,
                                    # SOCIALS, store links, CONTACT_MODE/ENDPOINT); writes web/
-  legal.py                         # privacy policy, terms and account-deletion page content
+  legal.py                         # privacy policy, terms, account deletion and claims-book form
+  claims.js                        # claims-book form logic, appended to web/js/site.js
                                    # (mirrors what the app really does; update with the app)
   pati_icons.py                    # custom brand icons (SVG) used instead of emojis
   base.css pages.css               # concatenated into web/css/base.css
   icons/                           # Simple Icons (CC0) for socials/LinkedIn
 backend/contact/                   # Lambda (Node 22 ESM, no dependencies)
-  src/handler.mjs                  # MODE=mock (validate + log) | live (DynamoDB → SES + Google Sheets)
+  src/handler.mjs                  # POST /contact and POST /reclamos; MODE=mock | live
+  src/claims.mjs                   # claim-sheet validation and text (Libro de Reclamaciones)
   src/validate.mjs src/aws.mjs     # validation; real AWS/Google clients for live
   test/                            # node --test (npm test)
 infra/                             # Pulumi (TypeScript), stack "prod", us-east-1
@@ -57,6 +59,7 @@ infra/                             # Pulumi (TypeScript), stack "prod", us-east-
                                    # (Google service account), Lambda, HTTP API (CORS, throttling)
 .github/workflows/backend.yml      # tests on every change; `pulumi up` on main once enabled
 docs/tiendas-privacidad.md         # store submission guide (Data safety / App Privacy, app blockers)
+docs/requerimientos-app-pati.md    # requirements for the app team (account deletion, payments, consent…)
 archive/patiweb.html               # historical design-tool export, never deployed
 ```
 
@@ -70,6 +73,14 @@ nothing). To go live: `pulumi up` in `infra/` with `pati-contact:mode: live`
 and `sheetId` set, load the Google service-account JSON into the
 `pati-contact/google-sa` secret, then set `CONTACT_MODE = "live"` and
 `CONTACT_ENDPOINT` to the `contactEndpoint` output and rebuild.
+
+**Libro de Reclamaciones** (`/libro-de-reclamaciones/`, form per Anexo I of DS
+011-2011-PCM): `CLAIMS_MODE = "email"` (current: the claim sheet is generated
+on screen and the consumer sends it by email/WhatsApp). To go live: deploy the
+backend (route `POST /reclamos`: yearly correlative number in DynamoDB, email
+copy to the consumer + info@pati.pe, row in the "Reclamos" tab), **request SES
+production access** (sandbox cannot email consumers), then set
+`CLAIMS_MODE = "live"` and `CLAIMS_ENDPOINT` to the `claimsEndpoint` output.
 
 Company data: Pati.pe, RUC 20616635485, Los Totorales 163, San Miguel.
 Email hola@pati.pe (form notifications go to info@pati.pe); WhatsApp

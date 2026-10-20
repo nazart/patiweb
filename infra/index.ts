@@ -81,6 +81,10 @@ const fn = new aws.lambda.Function(name, {
             SHEET_ID: sheetId,
             SHEET_TAB: "Mensajes",
             RATE_LIMIT_PER_HOUR: "5",
+            // Datos del proveedor para la Hoja de Reclamación.
+            PROVIDER_NAME: "Pati.pe",
+            PROVIDER_RUC: "20616635485",
+            PROVIDER_ADDRESS: "Los Totorales 163, San Miguel",
         },
     },
     tags,
@@ -109,6 +113,13 @@ new aws.apigatewayv2.Route(`${name}-route`, {
     routeKey: "POST /contact",
     target: pulumi.interpolate`integrations/${integration.id}`,
 });
+// Libro de Reclamaciones virtual: correlativo, registro y copia por correo al consumidor.
+// Nota: para enviar la copia a cualquier correo, SES debe salir del sandbox (solicitud de acceso de producción).
+new aws.apigatewayv2.Route(`${name}-claims-route`, {
+    apiId: api.id,
+    routeKey: "POST /reclamos",
+    target: pulumi.interpolate`integrations/${integration.id}`,
+});
 new aws.apigatewayv2.Stage(`${name}-stage`, {
     apiId: api.id,
     name: "$default",
@@ -124,6 +135,7 @@ new aws.lambda.Permission(`${name}-invoke`, {
 });
 
 export const contactEndpoint = pulumi.interpolate`${api.apiEndpoint}/contact`;
+export const claimsEndpoint = pulumi.interpolate`${api.apiEndpoint}/reclamos`;
 export const tableName = table.name;
 export const googleSecretName = googleSecret.name;
 export const lambdaMode = mode;

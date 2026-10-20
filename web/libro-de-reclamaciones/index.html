@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Libro de Reclamaciones · Pati</title>
-<meta name="description" content="Libro de Reclamaciones virtual de Pati.pe, conforme al Código de Protección y Defensa del Consumidor.">
+<meta name="description" content="Libro de Reclamaciones virtual de Pati.pe: presenta tu reclamo o queja conforme al Código de Protección y Defensa del Consumidor.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#FFD23F">
 <link rel="canonical" href="https://pati.pe/libro-de-reclamaciones/">
@@ -16,13 +16,13 @@
 <meta property="og:locale" content="es_PE">
 <meta property="og:url" content="https://pati.pe/libro-de-reclamaciones/">
 <meta property="og:title" content="Libro de Reclamaciones · Pati">
-<meta property="og:description" content="Libro de Reclamaciones virtual de Pati.pe, conforme al Código de Protección y Defensa del Consumidor.">
+<meta property="og:description" content="Libro de Reclamaciones virtual de Pati.pe: presenta tu reclamo o queja conforme al Código de Protección y Defensa del Consumidor.">
 <meta property="og:image" content="https://pati.pe/images/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Libro de Reclamaciones · Pati">
-<meta name="twitter:description" content="Libro de Reclamaciones virtual de Pati.pe, conforme al Código de Protección y Defensa del Consumidor.">
+<meta name="twitter:description" content="Libro de Reclamaciones virtual de Pati.pe: presenta tu reclamo o queja conforme al Código de Protección y Defensa del Consumidor.">
 <meta name="twitter:image" content="https://pati.pe/images/og-image.png">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -126,18 +126,82 @@
     <h1 class="h2">Libro de Reclamaciones.</h1>
     <p>Conforme al Código de Protección y Defensa del Consumidor (Ley N.º 29571).</p>
   </div>
-</section>
-<section class="trust">
-  <div class="wrap prose">
-    <h2>Datos del proveedor</h2>
-    <div class="legal-data"><span><strong>Razón social:</strong> Pati.pe</span><span><strong>RUC:</strong> 20616635485</span><span><strong>Domicilio:</strong> Los Totorales 163, San Miguel</span></div>
-    <div class="card notice" style="margin-top:32px">
-      <h2>Presenta tu reclamo o queja</h2>
-      <p><strong>Reclamo:</strong> disconformidad con un producto o servicio. <strong>Queja:</strong> disconformidad con la atención recibida.</p>
-      <p>Mientras habilitamos el formulario en línea, escríbenos por WhatsApp con tu nombre, documento de identidad, el detalle de lo ocurrido y lo que solicitas. Te enviaremos una constancia y responderemos en un plazo máximo de 15 días hábiles.</p>
-      <a class="btn wa" href="https://wa.me/51924519233?text=Hola%20Pati%2C%20quiero%20presentar%20un%20reclamo/queja.%20Nombre%3A%20%C2%B7%20DNI%3A%20%C2%B7%20Detalle%3A%20%C2%B7%20Pedido%3A%20%28%23libro-reclamaciones%29"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Presentar por WhatsApp</a>
+</section><section class="trust legal">
+  <div class="wrap legal-wrap">
+    <div class="card claim-head">
+      <div><span class="kicker-dark">Hoja de Reclamación virtual</span><h2>Libro de Reclamaciones</h2></div>
+      <div class="legal-data">
+        <span><strong>Proveedor:</strong> Pati.pe</span><span><strong>RUC:</strong> 20616635485</span><span><strong>Domicilio:</strong> Los Totorales 163, San Miguel</span>
+        <span><strong>Fecha:</strong> <span data-today>hoy</span></span>
+      </div>
     </div>
-    <!-- PENDIENTE: insertar aquí el formulario oficial (por ejemplo, Tally) antes de pasar a producción. -->
+
+    <div class="claim-defs">
+      <p><strong>Reclamo:</strong> disconformidad relacionada con los productos o servicios.</p>
+      <p><strong>Queja:</strong> disconformidad no relacionada con los productos o servicios, o malestar o descontento respecto a la atención al público.</p>
+    </div>
+
+    <form class="card claim-form" data-claim data-mode="email" data-endpoint="" data-mailto="hola@pati.pe" novalidate>
+      <fieldset>
+        <legend><span class="n">1</span>Identificación del consumidor reclamante</legend>
+        <label>Nombres y apellidos<input name="name" autocomplete="name" required maxlength="120"></label>
+        <div class="row2">
+          <label>Tipo de documento<select name="docType" required><option>DNI</option><option value="CE">Carné de extranjería</option><option>Pasaporte</option></select></label>
+          <label>Número de documento<input name="docNumber" required maxlength="12" autocapitalize="characters" inputmode="text"></label>
+        </div>
+        <label>Domicilio<input name="address" autocomplete="street-address" required maxlength="200"></label>
+        <div class="row2">
+          <label>Teléfono<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20"></label>
+          <label>Correo electrónico<input name="email" type="email" autocomplete="email" autocapitalize="none" required maxlength="160"></label>
+        </div>
+        <label class="check"><input name="isMinor" type="checkbox" id="minor"><span>Soy menor de edad</span></label>
+        <div class="guardian">
+          <p class="hint">Si eres menor de edad, completa los datos de tu padre, madre o apoderado.</p>
+          <div class="row2">
+            <label>Nombre del padre, madre o apoderado<input name="guardianName" maxlength="120"></label>
+            <label>Su documento de identidad<input name="guardianDoc" maxlength="12" autocapitalize="characters"></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">2</span>Identificación del bien contratado</legend>
+        <div class="radios" role="radiogroup" aria-label="Tipo de bien contratado">
+          <label class="radio"><input type="radio" name="itemType" value="producto" required><span>Producto</span></label>
+          <label class="radio"><input type="radio" name="itemType" value="servicio" checked><span>Servicio</span></label>
+        </div>
+        <label>Monto reclamado (S/) <small>(opcional)</small><input name="amount" inputmode="decimal" maxlength="12" placeholder="0.00"></label>
+        <label>Descripción<textarea name="itemDescription" rows="2" required maxlength="1000" placeholder="Por ejemplo: uso de la app Pati, oferta de un vendedor, atención por WhatsApp"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">3</span>Detalle de la reclamación y pedido del consumidor</legend>
+        <div class="radios" role="radiogroup" aria-label="Tipo de reclamación">
+          <label class="radio"><input type="radio" name="claimType" value="reclamo" required checked><span>Reclamo</span></label>
+          <label class="radio"><input type="radio" name="claimType" value="queja"><span>Queja</span></label>
+        </div>
+        <label>Detalle<textarea name="detail" rows="5" required maxlength="3000"></textarea></label>
+        <label>Pedido<textarea name="request" rows="3" required maxlength="1500" placeholder="¿Qué solicitas a Pati?"></textarea></label>
+      </fieldset>
+
+      <label class="hp" aria-hidden="true">No llenar<input name="website" tabindex="-1" autocomplete="off"></label>
+      <label class="check"><input name="accept" type="checkbox" required><span>Declaro que la información es verdadera y acepto el contenido de esta hoja. Pati tratará mis datos para atender mi reclamo, según su <a href="/privacidad/">política de privacidad</a>.</span></label>
+      <button class="btn" type="submit">Enviar hoja de reclamación</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="claim-result card" hidden tabindex="-1">
+      <span class="kicker-dark">Hoja de Reclamación</span>
+      <h2>N.º <span data-number></span></h2>
+      <p class="claim-next"></p>
+      <div class="claim-actions"></div>
+      <pre class="claim-copy"></pre>
+    </div>
+
+    <div class="claim-notes">
+      <p>La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante el Indecopi.</p>
+      <p>Pati deberá dar respuesta al reclamo o queja en un plazo no mayor a <strong>quince (15) días hábiles</strong> improrrogables.</p>
+    </div>
   </div>
 </section>
 </main>
