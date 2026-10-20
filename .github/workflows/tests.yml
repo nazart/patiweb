@@ -1,0 +1,45 @@
+# Suite obligatoria en cada push y PR: generador al día, unit tests del backend,
+# tipos de Pulumi y e2e de la web en iPhone (WebKit) y Android (Chromium).
+# Smoke manual contra un sitio desplegado: Actions → tests → Run workflow → url.
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL desplegada para el smoke (p. ej. https://dev-web.pati.pe)"
+        required: true
+        default: "https://dev-web.pati.pe"
+
+jobs:
+  suite:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm ci
+      - run: npm ci
+        working-directory: infra
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: playwright-report, path: playwright-report, retention-days: 7 }
+
+  smoke:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:smoke
+        env: { BASE_URL: "${{ inputs.url }}" }

@@ -1,0 +1,18 @@
+{
+  "name": "patiweb",
+  "private": true,
+  "description": "Monorepo de pati.pe: web estática (web/), backend del formulario (backend/), IaC (infra/), generador (tools/site/) y pruebas (tests/).",
+  "scripts": {
+    "build:site": "python3 tools/site/build.py",
+    "check:site": "python3 tools/site/check.py",
+    "test:unit": "npm --prefix backend/contact test",
+    "test:types": "npm --prefix infra run typecheck",
+    "test:e2e": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test": "npm run check:site && npm run test:unit && npm run test:types && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.49.1"
+  }
+}

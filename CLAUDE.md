@@ -37,6 +37,9 @@ web/                               # the site Amplify publishes (amplify.yml →
   nosotros/ contacto/ novedades/ privacidad/ terminos/ libro-de-reclamaciones/  (index.html each)
   404.html  robots.txt  sitemap.xml  llms.txt
   css/fonts.css css/base.css  fonts/  images/  js/site.js
+tests/e2e/                         # Playwright e2e (pages.ts lists every public page)
+playwright.config.ts  package.json # root: test scripts (npm test) and Playwright
+.claude/settings.json + hooks/     # Claude Code hook: npm test before every git commit
 tools/site/                        # generator (not deployed)
   build.py                         # ALL copy and data live here (FAQ, NEWS, FOUNDERS, LEGAL,
                                    # SOCIALS, store links, CONTACT_MODE/ENDPOINT); writes web/
@@ -67,6 +70,38 @@ and `sheetId` set, load the Google service-account JSON into the
 Company data: Pati.pe, RUC 20616635485, Los Totorales 163, San Miguel.
 Email hola@pati.pe (form notifications go to info@pati.pe); WhatsApp
 +51 924 519 233; horario L–V 8 a. m.–8 p. m.
+
+## Mandatory testing rule (every change)
+
+**No change is done until the full suite passes.** This applies to every
+change — copy, CSS, generator, backend or infra — and to every developer and
+agent.
+
+1. Run `npm test` before every commit. It runs, in order:
+   - `check:site` — `web/` matches `tools/site/build.py` (no hand edits, no forgotten rebuild)
+   - `test:unit` — backend unit tests (`backend/contact/test/`)
+   - `test:types` — Pulumi typecheck (`infra/`)
+   - `test:e2e` — Playwright on iPhone (WebKit) and Android (Chromium): every page
+     loads with no console errors or broken assets, one `<h1>`, valid JSON-LD,
+     no forbidden copy, internal links and WhatsApp links, menu, contact form,
+     hero animation, reduced motion, and axe accessibility (no serious/critical
+     violations, including WCAG AA contrast).
+2. New behaviour needs a new test in the same change: a new page goes into
+   `tests/e2e/pages.ts`; new backend logic gets a unit test.
+3. After every deploy (push to `staging` or `main`), wait for the Amplify job
+   and run the smoke against the deployed site:
+   `BASE_URL=https://dev-web.pati.pe npm run test:smoke` (or `https://pati.pe`).
+4. Never weaken or skip a test to make it pass; fix the cause. If a test is
+   wrong, say so explicitly and explain the change.
+
+Enforcement:
+- **Claude Code:** `.claude/settings.json` registers a `PreToolUse` hook
+  (`.claude/hooks/require-tests.sh`) that runs `npm test` before any
+  `git commit` and blocks the commit if it fails.
+- **CI:** `.github/workflows/tests.yml` runs the same `npm test` on every push
+  and pull request.
+
+Setup once: `npm install && npm --prefix infra install && npx playwright install chromium webkit`.
 
 ## Why no client templating engine
 
@@ -106,7 +141,8 @@ there is no single source array driving all of them anymore.
 ## Working locally
 
 ```
-python3 tools/site/build.py              # regenerate web/
+npm run build:site                       # regenerate web/ (python3 tools/site/build.py)
+npm test                                 # the mandatory suite (see above)
 python3 -m http.server 8000 -d web       # preview the site
 cd backend/contact && npm test           # backend tests
 cd infra && npm install && npm run typecheck

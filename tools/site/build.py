@@ -8,7 +8,8 @@ from pati_icons import icon  # íconos propios (reemplazan a los emojis)
 from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "..", "web")
+WEB = os.path.normpath(os.path.join(HERE, "..", "..", "web"))  # los assets (fotos, fuentes) viven aquí
+ROOT = sys.argv[1] if len(sys.argv) > 1 else WEB
 
 # ----------------------------------------------------------------- datos
 SITE = "https://pati.pe"
@@ -202,7 +203,7 @@ def news_cards(items, cls="card post"):
 
 def avatar(f, size=184):
     photo = "/images/team/%s.webp" % f["slug"]
-    if os.path.exists(os.path.join(ROOT, photo.lstrip("/"))):
+    if os.path.exists(os.path.join(WEB, photo.lstrip("/"))):
         return '<img class="avatar" src="%s" alt="Foto de %s" width="%d" height="%d" loading="lazy">' % (photo, f["name"], size, size)
     return '<span class="avatar" aria-hidden="true">%s</span>' % f["initials"]
 
@@ -648,6 +649,8 @@ css = css.replace("mark{background:#fff;color:#1E1340;", "mark{color:#1E1340;")
 css = css.replace(".mark{display:block;aspect-ratio:1308/1544;height:auto}", ".mark{display:block;height:auto}")
 css = css.replace("footer .pill{justify-self:start;font-size:28px;box-shadow:3px 3px 0 #000}", "footer .pill{justify-self:start;font-size:28px;box-shadow:3px 3px 0 #000;color:#1E1340}")
 css += open(os.path.join(HERE, "pages.css")).read()
+os.makedirs(os.path.join(ROOT, "css"), exist_ok=True)
+os.makedirs(os.path.join(ROOT, "js"), exist_ok=True)
 open(os.path.join(ROOT, "css", "base.css"), "w").write("/* Pati: estilos del sitio (diseño v3 \"Color peruano\"), mobile-first. */\n" + css.strip() + "\n")
 
 open(os.path.join(ROOT, "css", "fonts.css"), "w").write("""/* Bricolage Grotesque (variable: opsz 12–96, wght 400–800), auto-alojada. */

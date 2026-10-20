@@ -11,3 +11,7 @@ infra/bin/
 
 # caché de Python del generador
 __pycache__/
+
+# resultados de Playwright
+test-results/
+playwright-report/

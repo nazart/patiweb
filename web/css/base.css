@@ -489,3 +489,15 @@ img.avatar{object-fit:cover;background:#fff}
 .person .game{display:inline-flex;align-items:center;gap:6px}
 .promise::before{content:none}
 .promise .ico{width:40px;height:40px;flex:none;margin-top:-6px}
+
+/* ---------- contraste AA (verificado por tests/e2e/a11y.spec.ts) ----------
+   El naranja de marca (#EF5F1F) no alcanza 4.5:1 con texto blanco ni como texto
+   sobre fondos claros: las etiquetas naranjas llevan texto azul noche y el texto
+   naranja usa una variante más oscura. */
+:root{--orange-ink:#B5400F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--orange-ink:#FF9466}}
+:root[data-theme="dark"]{--orange-ink:#FF9466}
+.tag-orange,.duo .card:nth-child(1) .tag{color:#1E1340!important}
+.who .duo .card:nth-child(1) .tag{background:#1E1340;color:var(--yellow)!important}
+.kicker-dark,.post time,.timeline .card time{color:var(--orange-ink)}
+.latest .kicker-dark{color:#B5400F}
