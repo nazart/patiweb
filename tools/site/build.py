@@ -47,13 +47,15 @@ NEWS = [
 ]
 
 FAQ = [
-    ("¿Pati es gratis?", "Para quien compra, sí: siempre. Los vendedores siempre tienen créditos gratis para enviar ofertas; si necesitan más, pueden comprarlos o ganarlos compartiendo su código e interactuando con compradores."),
-    ("¿Qué puedo pedir?", "Lo que quieras comprar a un negocio: ropa, insumos, mercadería, equipos o regalos para un evento. Mientras más claro tu pedido (qué, cuántos y para cuándo), mejores ofertas recibes."),
-    ("¿Cómo pago lo que compro?", "Directamente al vendedor, como acuerden entre ustedes. Pati no cobra ni recibe pagos: si alguien te pide pagar “a Pati”, es un fraude."),
-    ("¿Cómo compro seguro?", "Antes de cerrar ves la oferta completa y conversas con el vendedor. Pide comprobante, prefiere medios de pago con respaldo y desconfía de precios demasiado bajos."),
-    ("¿Cómo me registro como vendedor?", "Descarga la app, crea tu cuenta de negocio y elige tu rubro. Desde ese momento te llegan pedidos y empiezas con créditos gratis."),
+    ("¿Pati es gratis?", "Sí. Para quien compra, siempre. Para quien vende, cada oferta usa 1 crédito y los créditos son gratis: 20 de bienvenida, 15 cada mes y 10 por cada negocio que invites. En el lanzamiento no vendemos créditos; si eso cambia, lo avisaremos antes."),
+    ("¿Qué puedo pedir?", "Lo que quieras comprar a un negocio: ropa, insumos, mercadería, equipos o regalos. Mientras más claro tu pedido (qué y cuántos), mejores ofertas recibes."),
+    ("¿A qué vendedores llega mi pedido?", "A vendedores del rubro que están cerca de ti, a unos 3 km. Por eso la app usa tu ubicación mientras la usas."),
+    ("¿Cómo pago lo que compro?", "Directamente al vendedor, como acuerden entre ustedes. Pati no cobra ni recibe pagos por las compras: si alguien te pide pagar “a Pati”, es un fraude."),
+    ("¿Cómo compro seguro?", "Antes de decidir ves la oferta completa, la tienda y su ubicación. Pide comprobante, prefiere medios de pago con respaldo y desconfía de precios demasiado bajos. Si algo sale mal, denuncia la oferta desde la app."),
+    ("¿El vendedor ve mi número?", "No. El vendedor ve la descripción, la categoría y las fotos de tu pedido, pero no tu número de celular."),
+    ("¿Cómo me registro como vendedor?", "Descarga la app, regístrate con tu celular, completa los datos de tu negocio y tu catálogo. Desde ese momento te llegan pedidos de tu rubro y empiezas con 20 créditos gratis."),
     ("¿Cuándo puedo descargar Pati?", "Pati sale en Google Play y App Store el 31 de octubre de 2026."),
-    ("¿Cómo les doy mi opinión?", "Escríbenos por WhatsApp o coméntanos en nuestras redes. Leemos todo, y las ideas que entran a la lista las contamos públicamente."),
+    ("¿Cómo elimino mi cuenta?", "Desde la app, en tu perfil, o pidiéndonoslo por WhatsApp o correo. Te explicamos todo en pati.pe/eliminar-cuenta."),
 ]
 
 def esc(s): return html.escape(s, quote=True)
@@ -116,7 +118,7 @@ def footer():
     <div class="foot-cols">
       <nav aria-label="Producto"><b>Producto</b><a href="/#como-funciona">Cómo funciona</a><a href="/#gratis">Gratis</a><a href="/#faq">Preguntas</a></nav>
       <nav aria-label="Pati"><b>Pati</b><a href="/nosotros/">Nosotros</a><a href="/novedades/">Novedades</a><a href="/contacto/">Contacto</a></nav>
-      <nav aria-label="Legal"><b>Legal</b><a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a><a href="/libro-de-reclamaciones/">Libro de Reclamaciones</a></nav>
+      <nav aria-label="Legal"><b>Legal</b><a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a><a href="/libro-de-reclamaciones/">Libro de Reclamaciones</a><a href="/eliminar-cuenta/">Eliminar cuenta</a></nav>
     </div>
     <span>Hecho en Perú [[ico:peru:flag]] · <a href="mailto:%s">%s</a> · WhatsApp %s</span>
     <span>© 2026 %s · RUC %s · %s</span>
@@ -230,10 +232,10 @@ HOME = '''
     <div class="phone" role="img" aria-label="Ejemplo ilustrativo: un pedido de 20 polos estampados recibe tres ofertas en Pati">
       <span class="best" aria-hidden="true">¡Gratis pa' ti!</span>
       <div class="screen" data-play aria-hidden="true">
-        <div class="msg">Busco <b>20 polos estampados</b> para mi promoción. Los necesito en 2 semanas.</div>
-        <div class="offer"><span>Taller de estampado</span><strong>S/ 18</strong><small>Listos en 8 días</small></div>
-        <div class="offer"><span>Confecciones</span><strong>S/ 16.50</strong><small>Listos en 10 días</small><img class="mark drop" src="/images/pati-mark.svg" alt="" width="1308" height="1544"></div>
-        <div class="offer"><span>Tienda de polos</span><strong>S/ 17</strong><small>Listos en 6 días</small></div>
+        <div class="msg">Busco <b>20 polos estampados</b> para mi promoción. ¿Quién los tiene?</div>
+        <div class="offer"><span>Taller de estampado</span><strong>S/ 18</strong><small>A 350 m de ti</small></div>
+        <div class="offer"><span>Confecciones</span><strong>S/ 16.50</strong><small>A 800 m de ti</small><img class="mark drop" src="/images/pati-mark.svg" alt="" width="1308" height="1544"></div>
+        <div class="offer"><span>Tienda de polos</span><strong>S/ 17</strong><small>A 1.2 km de ti</small></div>
       </div>
     </div>
   </div>
@@ -247,8 +249,8 @@ HOME = '''
     <p class="lead">Tres pasos y cero llamadas para cotizar.</p>
     <ol class="steps">
       <li><div><h3>Publica lo que buscas</h3><p>Qué producto, cuántos y para cuándo.</p></div></li>
-      <li><div><h3>Te llegan precios al toque</h3><p>Tu pedido llega a quienes venden eso y te mandan su oferta.</p></div></li>
-      <li><div><h3>Comparas y eliges</h3><p>Precio, plazo y condiciones lado a lado. Conversas y cierras con quien te convenga.</p></div></li>
+      <li><div><h3>Te llegan precios al toque</h3><p>Tu pedido llega a vendedores de ese rubro cerca de ti, y te mandan su oferta en minutos.</p></div></li>
+      <li><div><h3>Comparas y eliges</h3><p>Ves el precio, la tienda y cómo llegar. Eliges la oferta que más te conviene.</p></div></li>
     </ol>
   </div>
 </section>
@@ -265,7 +267,7 @@ HOME = '''
         <ul>
           <li><div><b>Ahorra horas</b><span>Un pedido reemplaza decenas de llamadas y mensajes.</span></div></li>
           <li><div><b>Compara de verdad</b><span>Sabes si estás pagando de más.</span></div></li>
-          <li><div><b>Tú decides</b><span>Conversas antes de acordar nada.</span></div></li>
+          <li><div><b>Cerca de ti</b><span>Ves la tienda y la ruta antes de ir.</span></div></li>
         </ul>
         <a class="btn" href="#descargar">Descargar Pati</a>
       </article>
@@ -291,19 +293,19 @@ HOME = '''
       <article class="card buyer">
         <span class="tag">Pa' ti si compras</span>
         <p class="big">Gratis. Siempre.</p>
-        <p>Pedir, recibir ofertas y conversar no te cuesta nada.</p>
+        <p>Pedir y recibir ofertas no te cuesta nada.</p>
       </article>
       <article class="card">
         <span class="tag tag-orange">Pa' ti si vendes</span>
         <p class="big big-sm">Siempre tendrás créditos gratis.</p>
-        <p>Cada oferta que envías usa créditos. Si necesitas más, los compras o los ganas:</p>
+        <p>Cada oferta que envías usa 1 crédito. Y los créditos te llegan gratis:</p>
         <div class="earn">
-          <div><em>[[ico:gift]]</em><p><b>Comparte tu código</b><span>Ganas cuando alguien se registra con él.</span></p></div>
-          <div><em>[[ico:chat]]</em><p><b>Atiende a compradores</b><span>Ganas cuando interactúas con ellos.</span></p></div>
+          <div><em>[[ico:gift]]</em><p><b>20 de bienvenida + 15 cada mes</b><span>Gratis, para que respondas pedidos desde el primer día.</span></p></div>
+          <div><em>[[ico:chat]]</em><p><b>Comparte tu código</b><span>Invita a otro negocio: ganan 10 créditos cada uno.</span></p></div>
         </div>
       </article>
     </div>
-    <p class="promise">[[ico:megaphone]]<span>Si algo cambia, te lo contamos primero a ti.</span></p>
+    <p class="promise">[[ico:megaphone]]<span>En el lanzamiento todo es gratis. Si algún día vendemos créditos, te lo contamos antes.</span></p>
   </div>
 </section>
 
@@ -314,7 +316,7 @@ HOME = '''
     <h2 class="h2">Pati se construye <mark>contigo.</mark></h2>
     <p class="lead">Recién empezamos. Cada mejora sale de lo que nos cuentan, y lo mostramos todo en redes.</p>
     <div class="road">
-      <div class="col"><h3><i></i>Llega en la primera versión</h3><ul><li>Publicar pedidos</li><li>Recibir ofertas</li><li>Conversar antes de cerrar</li></ul></div>
+      <div class="col"><h3><i></i>Llega en la primera versión</h3><ul><li>Publicar pedidos</li><li>Recibir ofertas</li><li>Ver la tienda y la ruta</li></ul></div>
       <div class="col"><h3><i></i>Estamos haciendo</h3><ul><li>Las apps para Android y iPhone, listas el 31 de octubre</li></ul></div>
       <div class="col"><h3><i></i>Lo pidieron ustedes</h3><ul><li>Esta lista la llenan ustedes.</li></ul></div>
     </div>
@@ -394,55 +396,22 @@ page("/novedades/", "Novedades de Pati: lo que vamos construyendo",
 CONTACT = 'por WhatsApp al <a href="%s">%s</a>' % (esc(wa("Hola Pati, tengo una consulta sobre mis datos:", "privacidad")), WA_HUMAN)
 LEGAL_BLOCK = '<div class="legal-data"><span><strong>Razón social:</strong> %s</span><span><strong>RUC:</strong> %s</span><span><strong>Domicilio:</strong> %s</span></div>' % (LEGAL["name"], LEGAL["ruc"], LEGAL["address"])
 
+import legal
+_wa_priv = esc(wa("Hola Pati, tengo una consulta sobre mis datos:", "privacidad"))
+_wa_terms = esc(wa("Hola Pati, tengo una consulta sobre los términos:", "terminos"))
+_wa_del = esc(wa("Hola Pati, quiero eliminar mi cuenta. Mi número registrado es:", "eliminar-cuenta"))
+
 page("/privacidad/", "Política de privacidad · Pati",
-     "Cómo Pati trata tus datos personales, conforme a la Ley N.º 29733 de Protección de Datos Personales.",
-     inner("Política de privacidad.", "Cómo cuidamos tus datos, en palabras simples.") + '''
-<section class="trust">
-  <div class="wrap prose">
-    <h2>Quiénes somos</h2>
-    {legal}
-    <h2>Qué datos usamos</h2>
-    <ul>
-      <li><strong>Datos de cuenta:</strong> nombre, número de celular y, si vendes, los datos de tu negocio y rubro.</li>
-      <li><strong>Pedidos y ofertas:</strong> lo que publicas, las ofertas que envías o recibes y las conversaciones dentro de la app.</li>
-      <li><strong>Datos de uso:</strong> información técnica básica para que la app y esta web funcionen y mejoren.</li>
-    </ul>
-    <h2>Para qué los usamos</h2>
-    <ul>
-      <li>Hacer llegar tu pedido a los vendedores del rubro y sus ofertas a ti.</li>
-      <li>Gestionar los créditos de los vendedores, incluidos los códigos de referido.</li>
-      <li>Atender tus consultas y prevenir fraudes.</li>
-      <li>Mejorar Pati a partir de cómo se usa.</li>
-    </ul>
-    <p>No vendemos tus datos personales.</p>
-    <h2>Tus derechos</h2>
-    <p>Puedes pedir acceso, rectificación, cancelación u oposición al uso de tus datos (derechos ARCO), según la Ley N.º 29733 y su reglamento. Escríbenos {contact}.</p>
-    <span class="updated">Última actualización: 18 de octubre de 2026</span>
-  </div>
-</section>'''.format(legal=LEGAL_BLOCK, contact=CONTACT))
+     "Qué datos usa la app Pati, para qué, con quién los compartimos y cómo ejercer tus derechos (Ley N.º 29733).",
+     inner("Política de privacidad.", "Cómo cuidamos tus datos, en palabras simples.") + legal.privacy(LEGAL, EMAIL, _wa_priv, WA_HUMAN))
 
 page("/terminos/", "Términos y condiciones · Pati",
-     "Condiciones de uso de Pati para compradores y vendedores.",
-     inner("Términos y condiciones.", "Las reglas del juego, claras para todos.") + '''
-<section class="trust">
-  <div class="wrap prose">
-    <h2>Qué es Pati</h2>
-    <p>Pati es una app que conecta a personas y negocios que quieren comprar con vendedores que ofrecen lo que buscan. Pati la opera {name} (RUC {ruc}).</p>
-    <h2>Pati no es parte de la compra</h2>
-    <p>El precio, el pago, la entrega y la garantía se acuerdan directamente entre comprador y vendedor. Pati no cobra ni recibe pagos por las compras.</p>
-    <h2>Para quien compra</h2>
-    <p>Usar Pati es gratis. Te pedimos publicar pedidos reales y tratar con respeto a los vendedores.</p>
-    <h2>Para quien vende</h2>
-    <ul>
-      <li>Enviar una oferta usa créditos. Siempre tendrás créditos gratis y puedes comprar más dentro de la app.</li>
-      <li>Puedes ganar créditos cuando alguien se registra con tu código o cuando interactúas con compradores.</li>
-      <li>Las ofertas deben ser reales y cumplibles.</li>
-    </ul>
-    <h2>Cambios</h2>
-    <p>Si cambiamos estas condiciones, lo avisaremos en la app y en nuestras redes antes de que entren en vigencia.</p>
-    <span class="updated">Última actualización: 18 de octubre de 2026</span>
-  </div>
-</section>'''.format(name=LEGAL["name"], ruc=LEGAL["ruc"]))
+     "Reglas de uso de Pati para compradores y vendedores: cómo funciona, créditos, conductas prohibidas y responsabilidades.",
+     inner("Términos y condiciones.", "Las reglas del juego, claras para todos.") + legal.terms(LEGAL, EMAIL, _wa_terms, WA_HUMAN))
+
+page("/eliminar-cuenta/", "Eliminar tu cuenta · Pati",
+     "Cómo eliminar tu cuenta de Pati desde la app o sin ella, qué datos se borran y en qué plazo.",
+     inner("Eliminar tu cuenta.", "Desde la app o pidiéndonoslo, cuando quieras.") + legal.delete_account(EMAIL, _wa_del, WA_HUMAN).replace("[[wa]]", ICON_WA))
 
 page("/libro-de-reclamaciones/", "Libro de Reclamaciones · Pati",
      "Libro de Reclamaciones virtual de Pati.pe, conforme al Código de Protección y Defensa del Consumidor.",
@@ -759,13 +728,14 @@ llms = """# Pati
 ## Cómo funciona
 
 1. Publica lo que buscas: qué producto, cuántos y para cuándo.
-2. Te llegan precios: tu pedido llega a quienes venden eso y ellos te mandan su oferta.
-3. Comparas y eliges: ves precio, condiciones y tiempo de entrega, conversas y cierras con quien te convenga.
+2. Te llegan precios: tu pedido llega a vendedores del rubro cercanos (unos 3 km) y ellos te mandan su oferta en minutos.
+3. Comparas y eliges: ves precio, la tienda y la ruta, y eliges la oferta que te conviene.
 
 ## Cuánto cuesta
 
 - Para quien compra: gratis, siempre.
-- Para quien vende: enviar una oferta usa créditos. Siempre tendrás créditos gratis; si necesitas más, puedes comprarlos. También ganas créditos cuando alguien se registra con tu código o cuando interactúas con compradores.
+- Para quien vende: enviar una oferta usa 1 crédito. Créditos gratis: 20 de bienvenida, 15 cada mes calendario (no acumulables) y 10 por referido (el nuevo vendedor recibe 10 al completar su catálogo; quien invitó, 10 cuando el nuevo envía su primera oferta).
+- Durante el lanzamiento Pati no vende créditos. Si se habilita la compra, se avisará antes.
 - Pati no cobra ni recibe pagos por las compras: el pago se acuerda directamente con el vendedor.
 
 ## Disponibilidad
@@ -812,12 +782,13 @@ Visión: Pati empieza conectando a quien compra con quien vende, pero busca ser 
 - [Política de privacidad]({site}/privacidad/)
 - [Términos y condiciones]({site}/terminos/)
 - [Libro de Reclamaciones]({site}/libro-de-reclamaciones/)
+- [Eliminar tu cuenta]({site}/eliminar-cuenta/)
 """.format(wa=WA_HUMAN, email=EMAIL, site=SITE, name=LEGAL["name"], ruc=LEGAL["ruc"], addr=LEGAL["address"],
            faq="\n\n".join("**%s**\n%s" % (q, a) for q, a in FAQ),
            news="\n".join("- %s: %s. %s" % (n["label"], n["title"], n["text"]) for n in NEWS))
 open(os.path.join(ROOT, "llms.txt"), "w").write(llms)
 
-urls = [("/", "weekly", "1.0"), ("/nosotros/", "monthly", "0.7"), ("/contacto/", "monthly", "0.6"), ("/novedades/", "weekly", "0.8"), ("/privacidad/", "yearly", "0.3"), ("/terminos/", "yearly", "0.3"), ("/libro-de-reclamaciones/", "yearly", "0.3")]
+urls = [("/", "weekly", "1.0"), ("/nosotros/", "monthly", "0.7"), ("/contacto/", "monthly", "0.6"), ("/novedades/", "weekly", "0.8"), ("/privacidad/", "yearly", "0.3"), ("/terminos/", "yearly", "0.3"), ("/libro-de-reclamaciones/", "yearly", "0.3"), ("/eliminar-cuenta/", "yearly", "0.3")]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
     "  <url>\n    <loc>%s%s</loc>\n    <lastmod>%s</lastmod>\n    <changefreq>%s</changefreq>\n    <priority>%s</priority>\n  </url>\n" % (SITE, u, TODAY, f, p) for u, f, p in urls) + "</urlset>\n"
 open(os.path.join(ROOT, "sitemap.xml"), "w").write(sm)

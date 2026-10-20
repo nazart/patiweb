@@ -5,13 +5,14 @@
 ## Cómo funciona
 
 1. Publica lo que buscas: qué producto, cuántos y para cuándo.
-2. Te llegan precios: tu pedido llega a quienes venden eso y ellos te mandan su oferta.
-3. Comparas y eliges: ves precio, condiciones y tiempo de entrega, conversas y cierras con quien te convenga.
+2. Te llegan precios: tu pedido llega a vendedores del rubro cercanos (unos 3 km) y ellos te mandan su oferta en minutos.
+3. Comparas y eliges: ves precio, la tienda y la ruta, y eliges la oferta que te conviene.
 
 ## Cuánto cuesta
 
 - Para quien compra: gratis, siempre.
-- Para quien vende: enviar una oferta usa créditos. Siempre tendrás créditos gratis; si necesitas más, puedes comprarlos. También ganas créditos cuando alguien se registra con tu código o cuando interactúas con compradores.
+- Para quien vende: enviar una oferta usa 1 crédito. Créditos gratis: 20 de bienvenida, 15 cada mes calendario (no acumulables) y 10 por referido (el nuevo vendedor recibe 10 al completar su catálogo; quien invitó, 10 cuando el nuevo envía su primera oferta).
+- Durante el lanzamiento Pati no vende créditos. Si se habilita la compra, se avisará antes.
 - Pati no cobra ni recibe pagos por las compras: el pago se acuerda directamente con el vendedor.
 
 ## Disponibilidad
@@ -25,25 +26,31 @@ Pati se construye en público con su comunidad: publicamos lo que hacemos en Tik
 ## Preguntas frecuentes
 
 **¿Pati es gratis?**
-Para quien compra, sí: siempre. Los vendedores siempre tienen créditos gratis para enviar ofertas; si necesitan más, pueden comprarlos o ganarlos compartiendo su código e interactuando con compradores.
+Sí. Para quien compra, siempre. Para quien vende, cada oferta usa 1 crédito y los créditos son gratis: 20 de bienvenida, 15 cada mes y 10 por cada negocio que invites. En el lanzamiento no vendemos créditos; si eso cambia, lo avisaremos antes.
 
 **¿Qué puedo pedir?**
-Lo que quieras comprar a un negocio: ropa, insumos, mercadería, equipos o regalos para un evento. Mientras más claro tu pedido (qué, cuántos y para cuándo), mejores ofertas recibes.
+Lo que quieras comprar a un negocio: ropa, insumos, mercadería, equipos o regalos. Mientras más claro tu pedido (qué y cuántos), mejores ofertas recibes.
+
+**¿A qué vendedores llega mi pedido?**
+A vendedores del rubro que están cerca de ti, a unos 3 km. Por eso la app usa tu ubicación mientras la usas.
 
 **¿Cómo pago lo que compro?**
-Directamente al vendedor, como acuerden entre ustedes. Pati no cobra ni recibe pagos: si alguien te pide pagar “a Pati”, es un fraude.
+Directamente al vendedor, como acuerden entre ustedes. Pati no cobra ni recibe pagos por las compras: si alguien te pide pagar “a Pati”, es un fraude.
 
 **¿Cómo compro seguro?**
-Antes de cerrar ves la oferta completa y conversas con el vendedor. Pide comprobante, prefiere medios de pago con respaldo y desconfía de precios demasiado bajos.
+Antes de decidir ves la oferta completa, la tienda y su ubicación. Pide comprobante, prefiere medios de pago con respaldo y desconfía de precios demasiado bajos. Si algo sale mal, denuncia la oferta desde la app.
+
+**¿El vendedor ve mi número?**
+No. El vendedor ve la descripción, la categoría y las fotos de tu pedido, pero no tu número de celular.
 
 **¿Cómo me registro como vendedor?**
-Descarga la app, crea tu cuenta de negocio y elige tu rubro. Desde ese momento te llegan pedidos y empiezas con créditos gratis.
+Descarga la app, regístrate con tu celular, completa los datos de tu negocio y tu catálogo. Desde ese momento te llegan pedidos de tu rubro y empiezas con 20 créditos gratis.
 
 **¿Cuándo puedo descargar Pati?**
 Pati sale en Google Play y App Store el 31 de octubre de 2026.
 
-**¿Cómo les doy mi opinión?**
-Escríbenos por WhatsApp o coméntanos en nuestras redes. Leemos todo, y las ideas que entran a la lista las contamos públicamente.
+**¿Cómo elimino mi cuenta?**
+Desde la app, en tu perfil, o pidiéndonoslo por WhatsApp o correo. Te explicamos todo en pati.pe/eliminar-cuenta.
 
 ## Novedades
 
@@ -79,3 +86,4 @@ Visión: Pati empieza conectando a quien compra con quien vende, pero busca ser 
 - [Política de privacidad](https://pati.pe/privacidad/)
 - [Términos y condiciones](https://pati.pe/terminos/)
 - [Libro de Reclamaciones](https://pati.pe/libro-de-reclamaciones/)
+- [Eliminar tu cuenta](https://pati.pe/eliminar-cuenta/)

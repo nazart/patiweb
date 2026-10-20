@@ -34,7 +34,7 @@ the real, current source.
 ```
 web/                               # the site Amplify publishes (amplify.yml → baseDirectory: web)
   index.html                       # home (8 secciones, ~600 palabras)
-  nosotros/ contacto/ novedades/ privacidad/ terminos/ libro-de-reclamaciones/  (index.html each)
+  nosotros/ contacto/ novedades/ privacidad/ terminos/ eliminar-cuenta/ libro-de-reclamaciones/  (index.html each)
   404.html  robots.txt  sitemap.xml  llms.txt
   css/fonts.css css/base.css  fonts/  images/  js/site.js
 tests/e2e/                         # Playwright e2e (pages.ts lists every public page)
@@ -43,6 +43,9 @@ playwright.config.ts  package.json # root: test scripts (npm test) and Playwrigh
 tools/site/                        # generator (not deployed)
   build.py                         # ALL copy and data live here (FAQ, NEWS, FOUNDERS, LEGAL,
                                    # SOCIALS, store links, CONTACT_MODE/ENDPOINT); writes web/
+  legal.py                         # privacy policy, terms and account-deletion page content
+                                   # (mirrors what the app really does; update with the app)
+  pati_icons.py                    # custom brand icons (SVG) used instead of emojis
   base.css pages.css               # concatenated into web/css/base.css
   icons/                           # Simple Icons (CC0) for socials/LinkedIn
 backend/contact/                   # Lambda (Node 22 ESM, no dependencies)
@@ -53,6 +56,7 @@ infra/                             # Pulumi (TypeScript), stack "prod", us-east-
   index.ts                         # DynamoDB, SES domain + DKIM in Route 53, Secrets Manager
                                    # (Google service account), Lambda, HTTP API (CORS, throttling)
 .github/workflows/backend.yml      # tests on every change; `pulumi up` on main once enabled
+docs/tiendas-privacidad.md         # store submission guide (Data safety / App Privacy, app blockers)
 archive/patiweb.html               # historical design-tool export, never deployed
 ```
 
