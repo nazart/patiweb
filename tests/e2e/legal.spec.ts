@@ -64,3 +64,16 @@ test("eliminar cuenta: datos que se conservan, con motivo y plazo", async ({ pag
   await page.goto("/privacidad/#eliminar");
   await expect(page.getByRole("region", { name: "Datos que conservamos tras eliminar la cuenta" })).toBeVisible();
 });
+
+test("eliminar cuenta: créditos, cuentas suspendidas y volver a registrarse", async ({ page }) => {
+  await page.goto("/eliminar-cuenta/");
+  const text = await page.locator("main").innerText();
+  for (const must of ["Pierdes todos tus créditos", "gratuitos como los comprados", "Si tu cuenta está suspendida", "desde cero"]) {
+    expect(text, must).toContain(must);
+  }
+  await page.goto("/terminos/");
+  const terms = await page.locator("#suspension").innerText();
+  for (const must of ["Cuentas suspendidas", "Volver a Pati", "se eliminan todos tus créditos"]) {
+    expect(terms, must).toContain(must);
+  }
+});
