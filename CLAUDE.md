@@ -60,6 +60,7 @@ infra/                             # Pulumi (TypeScript), stack "prod", us-east-
 .github/workflows/backend.yml      # tests on every change; `pulumi up` on main once enabled
 docs/tiendas-privacidad.md         # store submission guide (Data safety / App Privacy, app blockers)
 docs/requerimientos-app-pati.md    # requirements for the app team (account deletion, payments, consent…)
+docs/revision-legal-respuesta.md   # answer to the external legal review (status per item, real gaps)
 archive/patiweb.html               # historical design-tool export, never deployed
 ```
 

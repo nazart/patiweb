@@ -17,7 +17,7 @@ for (const path of ["/privacidad/", "/terminos/"]) {
 test("privacidad declara lo que exige la ficha de las tiendas", async ({ page }) => {
   await page.goto("/privacidad/");
   const text = await page.locator("main").innerText();
-  for (const must of ["Ley N.º 29733", "ubicación", "EE. UU.", "Twilio", "PostHog", "Gemini", "eliminar-cuenta", "18 años", "No vendemos"]) {
+  for (const must of ["Ley N.º 29733", "ubicación", "EE. UU.", "Twilio", "PostHog", "Gemini", "TypeSafe AI", "Culqi", "logs", "eliminar-cuenta", "18 años", "No vendemos"]) {
     expect(text, must).toContain(must);
   }
   await expect(page.locator('a[href="/eliminar-cuenta/"]').first()).toBeVisible();
@@ -36,4 +36,18 @@ test("eliminar cuenta: pasos en la app, vía alternativa y plazo", async ({ page
   await expect(page.getByRole("heading", { name: "Desde la app" })).toBeVisible();
   await expect(page.getByRole("link", { name: /Pedir por WhatsApp/ })).toHaveAttribute("href", /wa\.me\/51924519233/);
   await expect(page.getByText("30 días").first()).toBeVisible();
+});
+
+// Apple 1.2 / Google Play (contenido de usuarios): denunciar, bloquear y plazo de moderación.
+test("términos: moderación con denuncia, bloqueo y plazo de 24 horas", async ({ page }) => {
+  await page.goto("/terminos/");
+  const section = page.locator("#calificaciones");
+  await expect(section.getByRole("heading", { name: /denuncias y bloqueo/ })).toBeVisible();
+  const text = await section.innerText();
+  for (const must of ["Denunciar", "Bloquear", "24 horas", "retirar el contenido", "suspender la cuenta"]) {
+    expect(text, must).toContain(must);
+  }
+  const main = await page.locator("main").innerText();
+  expect(main).toContain("no vendemos créditos");
+  expect(main).not.toMatch(/puedes comprar (más )?créditos|comprar más dentro de la app/i);
 });

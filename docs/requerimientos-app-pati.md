@@ -1,6 +1,6 @@
 # Requerimientos para la app Pati antes de publicar en tiendas
 
-**Para:** equipo de la app (sesión `pati-04`) · **De:** web pati.pe · **Fecha:** 20 de octubre de 2026
+**Para:** equipo de la app (sesión `pati-04`) · **De:** web pati.pe · **Fecha:** 20 de octubre de 2026 (REQ-10 y REQ-11 añadidos el 22 de octubre)
 **Contexto:** la Política de privacidad, los Términos y la página de eliminación de cuenta de pati.pe
 describen cómo funciona la app (según lo informado por el equipo de la app el 2026-10-20). Para que la app
 sea aprobada por Google Play y App Store, y para que lo publicado sea cierto, la app debe cumplir lo
@@ -35,6 +35,7 @@ y la política de pagos de Google Play. Los Términos dicen que **en el lanzamie
 - [ ] Se mantienen: 20 de bienvenida (una vez), 15 cada mes calendario (no acumulables), referidos 10 + 10.
 - [ ] Mensaje cuando el vendedor se queda sin créditos: “Recibirás 15 créditos gratis el próximo mes. También puedes invitar a otro negocio con tu código.”
 - [ ] Feature flag (`CREDITS_PURCHASE_ENABLED=false`) para habilitarlo en el futuro tras decidir el medio de pago.
+- [ ] En producción, deshabilitar también los endpoints de compra: `payment-service` (cargo Culqi/Yape) y la compra simulada de `credits-service/src/credits/credits.controller.ts`.
 
 ## REQ-03 · Enlaces legales en la app — P0
 
@@ -64,6 +65,8 @@ y la política de pagos de Google Play. Los Términos dicen que **en el lanzamie
 - [ ] **Sentry:** al mergear, mantener `sendDefaultPii: false`, sin capturas ni cuerpos de peticiones.
 - [ ] **PostHog:** identificar solo con el ID interno (ya es así); no enviar teléfono, nombre ni ubicación precisa como propiedades.
 - [ ] Confirmar que el vendedor **no** recibe el teléfono del comprador en ninguna respuesta de la API.
+- [ ] **LLM de relevancia** (`matching-service/src/matching/relevance.service.ts`): usa `RELEVANCE_PROVIDER=jev` (TypeSafe AI, EE. UU.), ya declarado en la política (22 oct). Enviar solo el texto de la solicitud y el nombre y la descripción de los productos: nunca el teléfono, el nombre ni la ubicación. Declararlo también en Data safety y App Privacy.
+- [ ] **ngrok:** solo en desarrollo. Que no esté activo en producción (sin `NGROK_AUTHTOKEN`).
 - [ ] Si se agrega un proveedor nuevo, avisar para actualizar la política y los formularios de las tiendas.
 
 ## REQ-07 · Permisos del sistema — P1
@@ -71,9 +74,21 @@ y la política de pagos de Google Play. Los Términos dicen que **en el lanzamie
 - [ ] Ubicación solo **“mientras se usa la app”** (sin `ACCESS_BACKGROUND_LOCATION` ni “Siempre” en iOS).
 - [ ] Textos de permiso en iOS (`Info.plist`), en español:
   - `NSLocationWhenInUseUsageDescription`: “Pati usa tu ubicación para encontrar vendedores cerca de ti y mostrarte cómo llegar.”
-  - `NSPhotoLibraryUsageDescription`: “Pati usa tus fotos solo para adjuntarlas a tus pedidos, ofertas y productos.”
+  - `NSPhotoLibraryUsageDescription`: “Pati usa tus fotos solo para adjuntarlas a tus pedidos, ofertas y productos.” (hoy no está en `app.json`: configurarlo en el plugin `expo-image-picker` con `photosPermission` y `cameraPermission: false`).
+- [ ] Revisar el manifest final del APK/AAB de EAS: que `expo-image-picker` no agregue `CAMERA` ni `RECORD_AUDIO`.
 - [ ] Si no hay uso de cámara, no declarar `NSCameraUsageDescription` ni el permiso `CAMERA` en Android.
 - [ ] Sin SDK de publicidad ni IDFA: en iOS no mostrar ATT; en Google Play declarar “no usa ID de publicidad”.
+
+## REQ-12 · Logs sin datos personales y con plazo — P1
+
+**Por qué:** la política declara que los registros técnicos del servidor se guardan **30 días**. Hoy varios servicios
+registran el teléfono, el texto de WhatsApp y la ubicación en texto plano, y los logs de pm2 en la EC2 no tienen
+retención.
+
+- [ ] Enmascarar el teléfono en los logs (`+51 9•• ••• 233`) y no registrar el texto ni la ubicación de los mensajes de WhatsApp: `whatsapp-service` (`webhook.controller.ts:49`, `webhook.service.ts:187/258/271`, `conversation.service.ts:38/45`), `user-service/users.service.ts:425` y `notification-service/notifications.service.ts:261`.
+- [ ] El log del OTP (`auth-service/otp.service.ts:53`) solo en modo MOCK; nunca en producción.
+- [ ] Rotación de logs de pm2 (`pm2-logrotate`) o CloudWatch con `RetentionInDays: 30`.
+- [ ] Retención de PostHog y Sentry configurada en sus paneles (PostHog ≤ 12 meses, Sentry 30–90 días).
 
 ## REQ-08 · Edad mínima y soporte — P2
 
@@ -85,6 +100,35 @@ y la política de pagos de Google Play. Los Términos dicen que **en el lanzamie
 - [ ] Política de privacidad: https://pati.pe/privacidad/ · Eliminación de cuenta: https://pati.pe/eliminar-cuenta/ · Soporte: https://pati.pe/contacto/ · correo hola@pati.pe.
 - [ ] Llenar “Data safety” (Google) y “App Privacy” (Apple) según `docs/tiendas-privacidad.md`.
 - [ ] **Antes de enviar a revisión**, esas URLs deben estar publicadas en **pati.pe** (producción), no solo en dev-web.
+
+## REQ-10 · Bloquear usuarios — P0
+
+**Por qué:** Apple (guía 1.2, contenido generado por usuarios) exige poder **denunciar** contenido, **bloquear**
+a usuarios abusivos y que el equipo actúe a tiempo. Google Play tiene una exigencia equivalente. Los Términos
+(sección “Calificaciones, denuncias y bloqueo”) ya lo describen; por eso debe existir antes del envío.
+
+**Criterios de aceptación**
+- [ ] En una oferta y en el perfil de un vendedor hay una opción **“Bloquear”**, con confirmación.
+- [ ] El comprador deja de recibir ofertas del vendedor bloqueado.
+- [ ] El vendedor bloqueado deja de ver las solicitudes de ese comprador y no puede volver a ofertarle.
+- [ ] El vendedor también puede bloquear a un comprador.
+- [ ] En **Perfil → Usuarios bloqueados** se ven los bloqueos y se pueden deshacer.
+- [ ] Bloquear no le avisa a la otra persona.
+- [ ] El bloqueo se aplica también en el asistente de WhatsApp.
+
+## REQ-11 · Denuncias atendidas en 24 horas — P0
+
+**Por qué:** los Términos prometen que **una persona revisa cada denuncia en un máximo de 24 horas** y que
+podemos retirar el contenido, advertir, suspender o cerrar la cuenta. Apple pide que el desarrollador actúe
+sobre el contenido denunciado de forma oportuna.
+
+**Criterios de aceptación**
+- [ ] Cada denuncia nueva notifica al equipo al instante (correo a info@pati.pe y/o un canal interno).
+- [ ] El backoffice muestra las denuncias pendientes con su antigüedad y una alerta pasadas 20 horas.
+- [ ] Las acciones disponibles son retirar la oferta o el contenido (deja de verse de inmediato), advertir, suspender temporalmente y cerrar la cuenta.
+- [ ] Cada acción queda registrada: quién, cuándo y por qué.
+- [ ] El denunciante ve en la app que su denuncia fue recibida (“La revisaremos en un máximo de 24 horas”).
+- [ ] Al denunciar, la app ofrece también bloquear a ese usuario.
 
 ---
 

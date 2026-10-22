@@ -4,7 +4,7 @@ la app el 2026-10-20). Si la app cambia (datos, proveedores, créditos), actuali
 
 EFFECTIVE = "31 de octubre de 2026"
 EFFECTIVE_ISO = "2026-10-31"
-UPDATED = "20 de octubre de 2026"
+UPDATED = "22 de octubre de 2026"
 
 
 def sec(id_, title, simple, body):
@@ -63,13 +63,15 @@ def privacy(L, email, wa_link, wa_human):
                 ["Catálogo: productos, precios y fotos", "Vendedores", "Mostrar lo que vendes y emparejarte con pedidos."],
                 ["Ofertas: precio, mensaje y fotos", "Vendedores", "Responder solicitudes de compradores."],
                 ["Créditos y código de referido", "Vendedores", "Llevar tu saldo de créditos y premiar invitaciones."],
-                ["Token de notificaciones del dispositivo", "Todos", "Avisarte de nuevas solicitudes y ofertas."],
+                ["Token de notificaciones del dispositivo e historial de notificaciones", "Todos", "Avisarte de nuevas solicitudes y ofertas, y mostrarte los avisos que recibiste."],
                 ["Datos de uso de la app (con un ID interno, sin tu celular)", "Todos", "Saber qué funciona y mejorar la app."],
-                ["Reportes técnicos de errores (sin datos personales)", "Todos", "Encontrar y corregir fallas."],
-                ["Mensajes con nuestro asistente de WhatsApp", "Compradores", "Registrarte y crear solicitudes sin la app."],
+                ["Reportes técnicos de errores: modelo y sistema del dispositivo, versión de la app (sin tu nombre ni celular)", "Todos", "Encontrar y corregir fallas."],
+                ["Comentarios que nos envías desde la app (ideas, fallas o pedidos de ayuda)", "Todos", "Mejorar Pati y darte soporte."],
+                ["Mensajes con nuestro asistente de WhatsApp y la ubicación, si la compartes", "Compradores", "Registrarte y crear solicitudes sin la app."],
+                ["Número de Yape y datos de la compra (paquete, monto, estado)", "Vendedores que compren créditos, cuando se habilite", "Procesar el pago con Culqi. No guardamos el código de aprobación de Yape ni datos de tarjetas."],
                 ["Nombre, correo, celular y mensaje del formulario web", "Quien nos escribe", "Responder tu consulta."],
                 ["Nombre, documento, domicilio, teléfono, correo y detalle del reclamo", "Quien presenta un reclamo o queja", "Atender tu reclamo o queja en el Libro de Reclamaciones, como exige la ley."],
-            ]) + '''<p><strong>No recogemos</strong> tus contactos, tu micrófono, tu DNI, tu ubicación en segundo plano ni identificadores de publicidad, y no te rastreamos entre otras apps o sitios.</p>'''),
+            ]) + '''<p><strong>En la app no usamos</strong> tu cámara ni tu micrófono, y <strong>no recogemos</strong> tus contactos, tu DNI, tu correo, tu ubicación en segundo plano ni identificadores de publicidad. No te rastreamos entre otras apps o sitios.</p>'''),
         sec("permisos", "Permisos del celular",
             "Solo pedimos ubicación, fotos y notificaciones, y puedes desactivarlos.",
             '''<ul>
@@ -87,7 +89,7 @@ def privacy(L, email, wa_link, wa_human):
 <li>Emparejar automáticamente solicitudes con productos y vendedores.</li>
 <li>Gestionar créditos y el programa de referidos.</li>
 <li>Enviarte notificaciones del servicio.</li>
-<li>Gestionar calificaciones y denuncias, moderar contenido, prevenir fraudes y suspender cuentas que incumplan los <a href="/terminos/">Términos</a>.</li>
+<li>Gestionar calificaciones, denuncias y bloqueos, moderar contenido, prevenir fraudes y suspender cuentas que incumplan los <a href="/terminos/">Términos</a>.</li>
 <li>Atender tus consultas, reclamos y solicitudes de derechos.</li>
 <li>Medir el uso de la app y corregir errores.</li>
 <li>Cumplir obligaciones legales y requerimientos de autoridades.</li>
@@ -95,7 +97,7 @@ def privacy(L, email, wa_link, wa_human):
 <p><strong>Finalidad opcional</strong>, solo con tu consentimiento: enviarte novedades y promociones de Pati por notificación, SMS, WhatsApp o correo. Puedes aceptar o no, y retirar tu consentimiento en cualquier momento escribiéndonos; esto no afecta el uso de la app.</p>'''),
         sec("automatizado", "Emparejamiento automático",
             "Un sistema automático decide a qué vendedores llega tu pedido.",
-            '''<p>Para decidir qué vendedores reciben una solicitud, analizamos de forma automática su texto, su categoría, la distancia y el catálogo de cada vendedor. Para entender el texto usamos un servicio de inteligencia artificial de Google (Gemini), que recibe el texto de solicitudes y productos, sin tu número de celular. Este proceso no produce decisiones con efectos legales sobre ti; si crees que no funciona bien en tu caso, escríbenos y lo revisará una persona.</p>'''),
+            '''<p>Para decidir qué vendedores reciben una solicitud, analizamos de forma automática su texto, su categoría, la distancia y el catálogo de cada vendedor. Para entender el texto usamos servicios de inteligencia artificial de Google (Gemini) y de TypeSafe AI, que reciben solo el texto de la solicitud y el nombre y la descripción de los productos, sin tu nombre ni tu número de celular. Este proceso no produce decisiones con efectos legales sobre ti; si crees que no funciona bien en tu caso, escríbenos y lo revisará una persona.</p>'''),
         sec("visibilidad", "Qué ve la otra parte",
             "El vendedor ve tu pedido, no tu número. Tú ves la oferta y dónde está la tienda.",
             '''<ul>
@@ -110,10 +112,11 @@ def privacy(L, email, wa_link, wa_human):
                 ["Twilio", "EE. UU.", "SMS de verificación y asistente de WhatsApp."],
                 ["Google (Maps)", "EE. UU.", "Mapas, rutas y ubicación de tiendas a partir de su dirección."],
                 ["Google (Gemini)", "EE. UU.", "Emparejamiento automático de solicitudes y productos."],
+                ["TypeSafe AI", "EE. UU.", "Decidir qué productos son relevantes para cada solicitud (solo el texto de la solicitud y de los productos)."],
                 ["Google (Firebase Cloud Messaging) y Expo", "EE. UU.", "Envío de notificaciones."],
-                ["PostHog", "EE. UU.", "Analítica de uso con un ID interno."],
-                ["Sentry", "EE. UU.", "Reportes técnicos de errores, sin datos personales."],
-                ["Culqi", "Perú", "Procesar pagos, solo cuando se habilite la compra de créditos."],
+                ["PostHog", "EE. UU.", "Analítica de uso con un ID interno, sin tu celular y sin ubicarte por tu IP."],
+                ["Sentry", "EE. UU.", "Reportes técnicos de errores, sin tu nombre ni celular."],
+                ["Culqi", "Perú", "Procesar pagos con Yape (número de Yape y monto), solo cuando se habilite la compra de créditos."],
             ]) + '''<p>También podemos entregar datos a autoridades judiciales o administrativas cuando una norma o una orden nos obligue a hacerlo.</p>'''),
         sec("transferencias", "Transferencia internacional",
             "Tus datos se guardan en servidores de EE. UU.",
@@ -125,6 +128,7 @@ def privacy(L, email, wa_link, wa_human):
                 ["Solicitudes y la ubicación con que se crearon", "12 meses desde su creación."],
                 ["Conversación con el asistente de WhatsApp", "24 horas."],
                 ["Mensajes del formulario web", "12 meses."],
+                ["Registros técnicos del servidor (logs)", "30 días."],
                 ["Hojas del Libro de Reclamaciones", "Al menos 2 años desde su presentación, como exige el reglamento del Libro de Reclamaciones."],
                 ["Registros de compras de créditos (cuando se habiliten)", "5 años, por obligaciones tributarias."],
                 ["Denuncias y sanciones por fraude", "El tiempo necesario para prevenir nuevos fraudes y atender reclamos o procesos."],
@@ -135,6 +139,7 @@ def privacy(L, email, wa_link, wa_human):
 <li>Toda comunicación con la app y la web viaja cifrada (HTTPS).</li>
 <li>La base de datos, los discos y las fotos se almacenan cifrados.</li>
 <li>Las fotos solo se muestran con enlaces temporales que vencen en minutos.</li>
+<li>Tu sesión se guarda cifrada en tu celular y en nuestros servidores solo guardamos una huella (hash) de ella.</li>
 <li>Solo el personal autorizado de Pati accede a los datos, y únicamente cuando lo necesita.</li>
 </ul>
 <p>Ningún sistema es infalible. Si ocurre un incidente que afecte tus datos, te informaremos y comunicaremos a la ANPD conforme a la ley.</p>'''),
@@ -171,6 +176,7 @@ def terms(L, email, wa_link, wa_human):
 <li>Para el comprador, Pati es gratis. El vendedor usa 1 crédito por oferta y recibe créditos gratis.</li>
 <li>Durante el lanzamiento no vendemos créditos: todo es gratis. Si eso cambia, avisamos antes.</li>
 <li>Pati es para mayores de 18 años y exige un trato honesto y respetuoso.</li>
+<li>Puedes denunciar y bloquear a otros usuarios. Revisamos las denuncias en un máximo de 24 horas.</li>
 </ul>'''),
         sec("aceptacion", "Quiénes somos y aceptación",
             "Al usar Pati aceptas estas reglas.",
@@ -220,10 +226,19 @@ def terms(L, email, wa_link, wa_human):
 <li>Usar Pati para enviar spam o publicidad no relacionada con una solicitud.</li>
 <li>Copiar datos de la app con programas automáticos o intentar vulnerar su seguridad.</li>
 </ul>'''),
-        sec("calificaciones", "Calificaciones y denuncias",
-            "Las calificaciones y denuncias ayudan a mantener Pati confiable.",
-            '''<p>Al cerrar una solicitud, el comprador puede calificar al vendedor de 1 a 5 y dejar un comentario honesto. También puede denunciar una oferta o un vendedor por oferta falsa, cambio de precio, falta de respuesta, sospecha de fraude, robo o pérdida, acoso u otro motivo.</p>
-<p>Revisamos las denuncias y podemos retirar contenido, advertir o suspender cuentas. Las calificaciones o denuncias falsas también incumplen estos Términos.</p>'''),
+        sec("calificaciones", "Calificaciones, denuncias y bloqueo",
+            "Puedes calificar, denunciar y bloquear. Revisamos cada denuncia en un máximo de 24 horas.",
+            '''<p><strong>Calificar.</strong> Al cerrar una solicitud, el comprador puede calificar al vendedor de 1 a 5 y dejar un comentario honesto.</p>
+<p><strong>Denunciar.</strong> Desde la app puedes denunciar una oferta o un vendedor por oferta falsa, cambio de precio, falta de respuesta, sospecha de fraude, robo o pérdida, acoso u otro motivo. También puedes escribirnos a hola@pati.pe o por WhatsApp.</p>
+<p><strong>Bloquear.</strong> Puedes bloquear a un usuario desde la app: dejarás de recibir sus ofertas y él dejará de ver tus solicitudes. Puedes desbloquearlo cuando quieras desde tu perfil.</p>
+<p><strong>Cómo moderamos.</strong> Una persona del equipo de Pati revisa cada denuncia en un máximo de 24 horas. Según la gravedad, podemos:</p>
+<ul>
+<li>retirar el contenido o la oferta denunciada;</li>
+<li>advertir al usuario;</li>
+<li>suspender la cuenta de forma temporal;</li>
+<li>cerrar la cuenta de forma definitiva y, si corresponde, informar a las autoridades.</li>
+</ul>
+<p>Las calificaciones o denuncias falsas también incumplen estos Términos.</p>'''),
         sec("suspension", "Suspensión y cierre de cuenta",
             "Podemos suspender cuentas que incumplan; tú puedes cerrar la tuya cuando quieras.",
             '''<p>Podemos suspender o cerrar una cuenta que incumpla estos Términos, ponga en riesgo a otros usuarios o lo exija una autoridad. Cuando sea posible te explicaremos el motivo, y puedes escribirnos si crees que es un error.</p>

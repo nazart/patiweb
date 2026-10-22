@@ -26,7 +26,7 @@ esta guía, `tools/site/legal.py` y los formularios de las tiendas a la vez.
    guardar fecha y poder retirarlo.
 5. **Retención** (lo declarado en la política): solicitudes y su ubicación 12 meses; cuentas eliminadas 30 días;
    conversación del bot 24 h; ajustar la retención de PostHog.
-6. Verificar que **Gemini** se use con la API de pago (los datos no se usan para entrenar modelos) y que
+6. Verificar que **Gemini** y **TypeSafe AI** (LLM de relevancia, EE. UU.) se usen con planes que no entrenen modelos con nuestros datos, declararlos en Data safety y App Privacy, y que
    **Sentry** quede sin datos personales al mergearlo.
 
 ## Google Play → Data safety
