@@ -21,7 +21,13 @@ exige una URL web (ya existe: pati.pe/eliminar-cuenta). La web dice: *Perfil →
 - [ ] Pantalla de confirmación que explica qué se borra y que se pierden los créditos; requiere confirmación explícita (p. ej., escribir “ELIMINAR” o volver a verificar el OTP).
 - [ ] Al confirmar: se cierra la sesión y la cuenta queda inaccesible de inmediato.
 - [ ] Dentro de **30 días** se eliminan: cuenta y perfil (nombre, celular, distrito, fecha de nacimiento, género), perfil de negocio, catálogo, fotos en S3, ofertas, créditos, solicitudes con su latitud/longitud, token push, y el usuario en PostHog.
-- [ ] Se conservan, solo para ese fin: denuncias/sanciones por fraude y registros tributarios (cuando existan cobros).
+- [ ] Se conservan, solo para ese fin y con estos plazos (publicados en pati.pe/eliminar-cuenta):
+  - registros de compras de créditos (`Payment`): 5 años;
+  - hojas del Libro de Reclamaciones: al menos 2 años;
+  - denuncias y sanciones por fraude o abuso (`SellerReport`, `isBanned`): mientras dure el caso, hasta 2 años;
+  - calificaciones (`SellerRating`) que dejó el usuario: se **anonimizan** (sin `buyerId` ni nombre), se mantienen en el perfil del vendedor;
+  - logs: se borran solos a los 30 días (REQ-12).
+- [ ] También se eliminan: `Feedback`, `Notification`, `Favorite`, `PushToken`, `SellerReferralCode` y la persona en PostHog.
 - [ ] Funciona también para usuarios registrados solo por el asistente de WhatsApp (vía solicitud manual de soporte).
 - [ ] Endpoint de backoffice para atender solicitudes que lleguen por WhatsApp/correo (hola@pati.pe).
 

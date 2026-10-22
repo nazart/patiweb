@@ -131,7 +131,8 @@ def privacy(L, email, wa_link, wa_human):
                 ["Registros técnicos del servidor (logs)", "30 días."],
                 ["Hojas del Libro de Reclamaciones", "Al menos 2 años desde su presentación, como exige el reglamento del Libro de Reclamaciones."],
                 ["Registros de compras de créditos (cuando se habiliten)", "5 años, por obligaciones tributarias."],
-                ["Denuncias y sanciones por fraude", "El tiempo necesario para prevenir nuevos fraudes y atender reclamos o procesos."],
+                ["Denuncias y sanciones por fraude o abuso", "Mientras dure el caso, hasta 2 años, para prevenir nuevos fraudes y atender reclamos o procesos."],
+                ["Calificaciones a vendedores, tras eliminar tu cuenta", "Se anonimizan para mantener la reputación del vendedor."],
             ]) + "<p>Vencidos estos plazos, eliminamos los datos o los anonimizamos para que ya no te identifiquen.</p>"),
         sec("seguridad", "Cómo protegemos tus datos",
             "Cifrado, acceso restringido y fotos con enlaces temporales.",
@@ -150,7 +151,7 @@ def privacy(L, email, wa_link, wa_human):
 <p>Si no estás conforme con nuestra respuesta, puedes presentar una reclamación ante la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.</p>''' % contact),
         sec("eliminar", "Eliminar tu cuenta",
             "Puedes eliminarla desde la app o pidiéndonoslo.",
-            '''<p>Puedes eliminar tu cuenta desde la app o solicitarlo por correo o WhatsApp. Te explicamos el proceso, qué se borra y en qué plazo en <a href="/eliminar-cuenta/">pati.pe/eliminar-cuenta</a>.</p>'''),
+            '''<p>Puedes eliminar tu cuenta desde la app o solicitarlo por correo o WhatsApp. Tu cuenta deja de estar disponible de inmediato y eliminamos tus datos dentro de los <strong>30 días</strong> siguientes. Solo conservamos, por el plazo indicado y únicamente para ese fin:</p>''' + table(["Dato", "Por qué", "Plazo"], label="Datos que conservamos tras eliminar la cuenta", rows=RETAINED_ROWS) + '''<p>El proceso paso a paso está en <a href="/eliminar-cuenta/">pati.pe/eliminar-cuenta</a>.</p>'''),
         sec("menores", "Menores de edad",
             "Pati es solo para mayores de 18 años.",
             '''<p>Pati está dirigida a personas mayores de 18 años. No recogemos a sabiendas datos de menores; si detectamos una cuenta de un menor, la eliminaremos.</p>'''),
@@ -269,7 +270,18 @@ def terms(L, email, wa_link, wa_human):
 
 
 # ----------------------------------------------------------------- eliminar cuenta
+# Lo que se conserva tras eliminar la cuenta (Google Play pide decirlo en la URL de eliminación).
+RETAINED_ROWS = [
+    ["Registros de compras de créditos, si las hubo", "Obligaciones tributarias", "5 años"],
+    ["Hojas del Libro de Reclamaciones que presentaste", "Lo exige el reglamento del Libro de Reclamaciones", "Al menos 2 años desde su presentación"],
+    ["Denuncias y sanciones por fraude o abuso", "Evitar que se vuelva a defraudar y atender reclamos o procesos", "Mientras dure el caso, hasta 2 años"],
+    ["Calificaciones que dejaste a vendedores", "Mantener la reputación de los vendedores", "Se anonimizan: dejan de identificarte"],
+    ["Registros técnicos del servidor (logs)", "Seguridad del servicio", "Se borran solos a los 30 días"],
+]
+
+
 def delete_account(email, wa_link, wa_human):
+    RETAINED = table(["Dato", "Por qué", "Plazo"], label="Datos que conservamos", rows=RETAINED_ROWS)
     return '''<section class="trust legal">
   <div class="wrap legal-wrap prose">
     <p class="legal-intro">Puedes eliminar tu cuenta de Pati cuando quieras. Así funciona.</p>
@@ -280,12 +292,14 @@ def delete_account(email, wa_link, wa_human):
         <p>o al correo <a href="mailto:%s?subject=Eliminar%%20mi%%20cuenta%%20de%%20Pati">%s</a> indicando tu número de celular. Para proteger tu cuenta, podemos pedirte confirmar que eres el titular.</p></article>
     </div>
     <h2>Qué se elimina</h2>
-    <ul><li>Tu cuenta y perfil: nombre, celular, distrito, fecha de nacimiento y género.</li><li>Si eres vendedor: tu perfil de negocio, catálogo, fotos, ofertas y créditos.</li><li>Tus solicitudes, sus fotos y la ubicación con que se crearon.</li><li>El token de notificaciones de tu dispositivo.</li></ul>
+    <ul><li>Tu cuenta y perfil: nombre, celular, distrito, fecha de nacimiento y género.</li><li>Si eres vendedor: tu perfil de negocio, catálogo, fotos, ofertas, créditos y código de referido.</li><li>Tus solicitudes, sus fotos y la ubicación con que se crearon, y tus favoritos.</li><li>Los comentarios que nos enviaste desde la app y tu historial de notificaciones.</li><li>El token de notificaciones de tu dispositivo y tu perfil en la analítica de uso.</li></ul>
     <h2>Plazo</h2>
-    <p>Eliminamos tus datos dentro de los <strong>30 días</strong> siguientes a tu solicitud. Podemos conservar por más tiempo solo lo que la ley nos obliga a guardar (por ejemplo, registros tributarios) o lo necesario para atender denuncias de fraude, y únicamente para ese fin.</p>
-    <p>Más detalles en nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
+    <p>Al confirmar, tu sesión se cierra y tu cuenta deja de estar disponible de inmediato. Eliminamos tus datos dentro de los <strong>30 días</strong> siguientes a tu solicitud.</p>
+    <h2>Qué conservamos y por cuánto tiempo</h2>
+    <p>Solo conservamos lo siguiente, por los motivos indicados y únicamente para ese fin. Vencido el plazo, lo eliminamos.</p>
+''' % (wa_link, email, email) + RETAINED + '''    <p>Más detalles en nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
   </div>
-</section>''' % (wa_link, email, email)
+</section>'''
 
 
 # ----------------------------------------------------------------- libro de reclamaciones

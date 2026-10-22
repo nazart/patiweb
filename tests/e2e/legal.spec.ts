@@ -51,3 +51,16 @@ test("términos: moderación con denuncia, bloqueo y plazo de 24 horas", async (
   expect(main).toContain("no vendemos créditos");
   expect(main).not.toMatch(/puedes comprar (más )?créditos|comprar más dentro de la app/i);
 });
+
+// Google Play: la URL de eliminación debe decir qué se borra, qué se conserva y por cuánto tiempo.
+test("eliminar cuenta: datos que se conservan, con motivo y plazo", async ({ page }) => {
+  await page.goto("/eliminar-cuenta/");
+  await expect(page.getByRole("heading", { name: "Qué conservamos y por cuánto tiempo" })).toBeVisible();
+  const table = page.getByRole("region", { name: "Datos que conservamos" });
+  const text = await table.innerText();
+  for (const must of ["5 años", "Libro de Reclamaciones", "hasta 2 años", "anonimizan", "30 días"]) {
+    expect(text, must).toContain(must);
+  }
+  await page.goto("/privacidad/#eliminar");
+  await expect(page.getByRole("region", { name: "Datos que conservamos tras eliminar la cuenta" })).toBeVisible();
+});
