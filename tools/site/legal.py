@@ -151,7 +151,7 @@ def privacy(L, email, wa_link, wa_human):
 <p>Si no estás conforme con nuestra respuesta, puedes presentar una reclamación ante la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.</p>''' % contact),
         sec("eliminar", "Eliminar tu cuenta",
             "Puedes eliminarla desde la app o pidiéndonoslo.",
-            '''<p>Puedes eliminar tu cuenta desde la app o solicitarlo por correo o WhatsApp. Tu cuenta deja de estar disponible de inmediato y eliminamos tus datos dentro de los <strong>30 días</strong> siguientes. Solo conservamos, por el plazo indicado y únicamente para ese fin:</p>''' + table(["Dato", "Por qué", "Plazo"], label="Datos que conservamos tras eliminar la cuenta", rows=RETAINED_ROWS) + '''<p>El proceso paso a paso está en <a href="/eliminar-cuenta/">pati.pe/eliminar-cuenta</a>.</p>'''),
+            '''<p>Puedes eliminar tu cuenta desde la app o solicitarlo por correo o WhatsApp. Tu cuenta deja de estar disponible de inmediato y eliminamos tus datos dentro de los <strong>30 días</strong> siguientes. Si tu cuenta está suspendida por una denuncia ya revisada, podrás eliminarla cuando termine la suspensión. Si vuelves a registrarte, tu nueva cuenta empieza desde cero. Solo conservamos, por el plazo indicado y únicamente para ese fin:</p>''' + table(["Dato", "Por qué", "Plazo"], label="Datos que conservamos tras eliminar la cuenta", rows=RETAINED_ROWS) + '''<p>El proceso paso a paso está en <a href="/eliminar-cuenta/">pati.pe/eliminar-cuenta</a>.</p>'''),
         sec("menores", "Menores de edad",
             "Pati es solo para mayores de 18 años.",
             '''<p>Pati está dirigida a personas mayores de 18 años. No recogemos a sabiendas datos de menores; si detectamos una cuenta de un menor, la eliminaremos.</p>'''),
@@ -214,7 +214,7 @@ def terms(L, email, wa_link, wa_human):
 <li>Los créditos no son dinero: no se pueden canjear por dinero, transferir ni vender.</li>
 <li>Podemos anular créditos obtenidos con trampa, por ejemplo con cuentas falsas para aprovechar referidos.</li>
 </ul>
-<p><strong>Compra de créditos.</strong> Durante el lanzamiento Pati no vende créditos: el servicio es gratuito. Si más adelante habilitamos la compra de paquetes, te informaremos los precios, el medio de pago y sus condiciones antes de que esté disponible y actualizaremos estos Términos. Los créditos que compres no vencerán.</p>'''),
+<p><strong>Compra de créditos.</strong> Durante el lanzamiento Pati no vende créditos: el servicio es gratuito. Si más adelante habilitamos la compra de paquetes, te informaremos los precios, el medio de pago y sus condiciones antes de que esté disponible y actualizaremos estos Términos. Los créditos que compres no vencerán, pero se eliminan si eliminas tu cuenta.</p>'''),
         sec("reglas", "Lo que no está permitido",
             "Nada ilegal, falso ni abusivo.",
             '''<p>En Pati no está permitido:</p>
@@ -241,9 +241,11 @@ def terms(L, email, wa_link, wa_human):
 </ul>
 <p>Las calificaciones o denuncias falsas también incumplen estos Términos.</p>'''),
         sec("suspension", "Suspensión y cierre de cuenta",
-            "Podemos suspender cuentas que incumplan; tú puedes cerrar la tuya cuando quieras.",
+            "Podemos suspender cuentas que incumplan. Puedes eliminar la tuya, salvo mientras esté suspendida, y volver a empezar desde cero.",
             '''<p>Podemos suspender o cerrar una cuenta que incumpla estos Términos, ponga en riesgo a otros usuarios o lo exija una autoridad. Cuando sea posible te explicaremos el motivo, y puedes escribirnos si crees que es un error.</p>
-<p>Puedes dejar de usar Pati y <a href="/eliminar-cuenta/">eliminar tu cuenta</a> en cualquier momento. Al eliminarla pierdes los créditos que tengas.</p>'''),
+<p>Puedes dejar de usar Pati y <a href="/eliminar-cuenta/">eliminar tu cuenta</a> cuando quieras. Al eliminarla <strong>se eliminan todos tus créditos</strong>, tanto los gratuitos como los comprados.</p>
+<p><strong>Cuentas suspendidas.</strong> Si el equipo de Pati revisó una denuncia y suspendió tu cuenta, no podrás eliminarla mientras dure la suspensión. Cuando termine, podrás eliminarla con normalidad.</p>
+<p><strong>Volver a Pati.</strong> Después de eliminar tu cuenta puedes crear una nueva, incluso con el mismo celular. Empezará desde cero: no recuperarás tus datos, créditos, solicitudes, ofertas ni calificaciones anteriores.</p>'''),
         sec("contenido", "Tu contenido y nuestra marca",
             "Tus fotos y textos siguen siendo tuyos; nos permites mostrarlos en Pati.",
             '''<p>Conservas los derechos sobre las fotos y textos que publicas. Nos das permiso, gratuito y mientras tengas el contenido publicado, para alojarlo y mostrarlo dentro de Pati con el fin de prestar el servicio. Declaras que tienes derecho a publicar ese contenido.</p>
@@ -293,6 +295,8 @@ def delete_account(email, wa_link, wa_human):
     </div>
     <h2>Qué se elimina</h2>
     <ul><li>Tu cuenta y perfil: nombre, celular, distrito, fecha de nacimiento y género.</li><li>Si eres vendedor: tu perfil de negocio, catálogo, fotos, ofertas, créditos y código de referido.</li><li>Tus solicitudes, sus fotos y la ubicación con que se crearon, y tus favoritos.</li><li>Los comentarios que nos enviaste desde la app y tu historial de notificaciones.</li><li>El token de notificaciones de tu dispositivo y tu perfil en la analítica de uso.</li></ul>
+    <h2>Antes de eliminarla, ten en cuenta</h2>
+    <ul><li><strong>Pierdes todos tus créditos</strong>, tanto los gratuitos como los comprados. Antes de confirmar, la app te muestra cuántos tienes.</li><li><strong>Si tu cuenta está suspendida</strong> porque el equipo de Pati revisó una denuncia, no podrás eliminarla mientras dure la suspensión. Cuando termine, podrás hacerlo.</li><li><strong>Puedes volver cuando quieras</strong> creando una cuenta nueva, incluso con el mismo celular. Empezará desde cero, como cualquier cuenta nueva: no recuperarás nada de lo eliminado.</li></ul>
     <h2>Plazo</h2>
     <p>Al confirmar, tu sesión se cierra y tu cuenta deja de estar disponible de inmediato. Eliminamos tus datos dentro de los <strong>30 días</strong> siguientes a tu solicitud.</p>
     <h2>Qué conservamos y por cuánto tiempo</h2>
